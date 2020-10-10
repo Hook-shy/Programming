@@ -1,0 +1,190 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../lib/font-awesome/css/font-awesome.min.css" />
+    <script src="../js/jquery-3.4.1.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../lib/monaco-editor-0.19.2/package/min/vs/loader.js"></script>
+    <link rel="stylesheet" href="../css/code.css">
+    <title>web代码编辑器</title>
+</head>
+
+<body>
+    <div id="myleft">
+        <div id="mymenu">
+            <div class="mymenuicon" title="文件" id="myMenuIconFile">
+                <span class="fa fa-folder-o"></span>
+            </div>
+            <div class="mymenuicon" title="编辑" id="myMenuIconEdit">
+                <span class="fa fa-edit"></span>
+            </div>
+            <div class="mymenuicon" title="运行" id="myMenuIconRun">
+                <span class="fa fa-bug"></span>
+            </div>
+            <div class="mymenuicon" title="设置" id="myMenuIconSetting">
+                <span class="fa fa-cog"></span>
+            </div>
+        </div>
+    </div>
+    <div id="myright">
+        <div id="tool">
+            <div id="filebar">
+                <!-- <div id="more" title="菜单">☰</div> -->
+                <ul id="file">
+                    <!-- <li class="fileitems" onclick="fileitemclick(0)">
+                        <div class="fileitems fileitemsactive">
+                            <div class="myfileicon">♪</div>
+                            开始
+                            <div class="myclose" title="关闭" onclick="fileitemclose(0)">×</div>
+                        </div>
+                    </li> -->
+                </ul>
+            </div>
+        </div>
+        <!-- <div style="height: 50px;"></div> -->
+        <div id="edit">
+            <div id="editarea">
+                <div id="editor"> </div>
+                <div id="debug">
+                    <iframe id="htmldebug" src="" frameborder="0"></iframe>
+                    <div id="debugtextarea" name=""></div>
+                </div>
+            </div>
+            <div id="startoperation">
+                <div style="font-size: 2em;" id="starttitle">
+                    在线代码编辑器
+                </div>
+                <div id="fileoperation">
+                    <a href="javascript:showNewFileBox();">
+                        <span class="fa fa-plus" style="font-size: 5em;"></span>
+                        <br> 新建文件
+                    </a>
+                    <a href="javascript:openFile();">
+                        <span class="fa fa-folder-open-o" style="font-size: 5em;"></span>
+                        <br> 打开文件
+                    </a>
+                    <a href="javascript:document.getElementById('uploadfile').click();">
+                        <span class="fa fa-arrow-up" style="font-size: 5em;"></span>
+                        <br> 导入文件
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="mymenus">
+        <div class="mymenusitems" id="myMenuItemFile">
+            <div class="mymenutitle">文件</div>
+            <div class="operationbuttons">
+                <div class="operationbutton" title="新建文件" onclick="showNewFileBox()">
+                    <span class="fa fa-plus"></span>
+                </div>
+                <div class="operationbutton" title="导入文件" onclick="document.getElementById('uploadfile').click();">
+                    <span class="fa fa-cloud-upload"></span>
+                </div>
+                <div class="operationbutton" title="导出文件" onclick="exportfile()">
+                    <span class="fa fa-cloud-download"></span>
+                </div>
+                <div class="operationbutton" title="删除当前文件" onclick="deletecurrentfile()">
+                    <span class="fa fa-trash"></span>
+                </div>
+                <div class="operationbutton" title="重命名当前文件" onclick="renamecurrentfile()">
+                    <span class="fa fa-eraser"></span>
+                </div>
+            </div>
+            <div class="mymenusmalltitle">打开的文件</div>
+            <ul class="menuitemlist" id="openfileslist">
+            </ul>
+            <div class="mymenusmalltitle">所有文件</div>
+            <ul class="menuitemlist" id="allfileslist">
+            </ul>
+        </div>        
+        <div class="mymenusitems" id="myMenuItemEdit">
+            <div class="mymenutitle">编辑</div>
+            <ul class="menuitemlist">
+                <li onclick="command('editor.action.unDo')">撤销</li>
+                <li onclick="command('editor.action.formatDocument')">格式化文档</li>
+            </ul>
+        </div>
+        <div class="mymenusitems" id="myMenuItemRun">
+            <div class="mymenutitle">运行</div>
+            <ul class="menuitemlist">
+                <li onclick="showandhideDebugdiv()">控制台</li>
+                <li onclick="clearconsole()">清空控制台</li>
+                <li onclick="startdebug()">开始运行</li>
+            </ul>
+        </div>
+        <div class="mymenusitems" id="myMenuItemSetting">
+            <div class="mymenutitle">设置</div>
+            <div class="mymenusmalltitle">语言</div>
+            <ul class="menuitemlist" id="menuitemlanlist">
+            </ul>
+            <div class="mymenusmalltitle">主题</div>
+            <ul class="menuitemlist">
+                <li onclick="setTheme('vs')">vs</li>
+                <li onclick="setTheme('vs-dark')">vs-dark</li>
+                <li onclick="setTheme('hc-black')">hc-black</li>
+            </ul>
+        </div>
+    </div>
+    <div id="status">
+        <div id="theme" class="statuscell" title="主题" style="margin-right: 30px;">
+
+        </div>
+        <div id="language" class="statuscell" title="语言">
+
+        </div>
+        <div id="location" class="statuscell" title="位置">
+
+        </div>
+    </div>
+    <div id="backgraoundwindow"></div>
+    <div id="windowback">
+        <div id="newfilebox">
+            <div id="boxtitle">新建文件</div>
+            <div style="margin-bottom: 10px;">名&nbsp;&nbsp;称：</div>
+            <input type="text" name="" id="newfileboxtextbox" value="untitled" autocomplete="off" oninput="checkfilename()">
+            <br>语&nbsp;&nbsp;言：
+            <select name="language" id="newfileboxselect" onchange="checkfilename()">
+            </select>
+            <br>
+            <div id="errorinfo">
+
+            </div>
+            <div class="mybutton" id="buttonok" onclick="buttonokclick()">确定</div>
+            <div class="mybutton" id="buttoncancel" onclick="hideNewFileBox()">取消</div>
+        </div>
+    </div>
+    <input type="file" style="display: none;" id="uploadfile" multiple="multiple" onchange="importfile(this)">
+    <script>
+        var monacoEditor;
+        require.config({
+            paths: {
+                'vs': '../lib/monaco-editor-0.19.2/package/min/vs'
+            }
+        });
+        require(['vs/editor/editor.main'], function () {
+            monacoEditor = monaco.editor.create(document.getElementById('editor'), {
+                value: 'print("Hello World")',
+                language: 'python',
+                //“ vs”（默认），“ vs-dark”，“ hc-black”
+                theme: 'vs',
+                automaticLayout: true
+            });
+        });
+    </script>
+    <script>
+        require(['../lib/monaco-editor-0.19.2/package/esm/vs/editor/browser/editorExtensions.js'], function () {
+            console.log(editorExtensions.EditorExtensionsRegistry.getEditorActions());
+        })
+    </script>
+    <!-- <script src="../monaco-editor-0.19.2/package/esm/vs/editor/browser/editorExtensions.js" type="model"></script>
+    <script>
+        console.log(editorExtensions.EditorExtensionsRegistry.getEditorActions());
+    </script> -->
+    <script src="../js/code.js"></script>
+</body>
+
+</html>

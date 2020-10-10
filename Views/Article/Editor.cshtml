@@ -1,0 +1,118 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Shared/_Main.cshtml";
+}
+<!-- header end -->
+<!-- main content begin -->
+<div id="editor-container">
+    <div class="container">
+        <form action="/Article/ArticleSubmit" method="POST" style="margin-top: 50px;">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputCity">文章标题</label>
+                    <input type="text" class="form-control" id="inputCity" placeholder="文章标题" name="title" value="@(ViewData["Title"] == null? "":ViewData["Title"])">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="inputZip">关键词</label>
+                    <input type="text" class="form-control" id="inputZip" placeholder="关键词" name="keyword" value="@(ViewData["KeyWord"] == null? "":ViewData["KeyWord"])@ViewData["KeyWord"]">
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="inputState">类别</label>
+                    <select id="inputState" class="form-control" name="family">
+                        @if (ViewData["Family"] == null)
+                        {
+                            <option value="经验" selected>经验</option>
+                            <option value="前端开发">前端开发</option>
+                            <option value="后端开发">后端开发</option>
+                            <option value="Java">Java</option>
+                            <option value="Python">Python</option>
+                            <option value="其他">其他</option>
+                        }
+                        else
+                        {
+                            @if (ViewData["Family"].ToString().Equals("经验"))
+                            {
+                                <option value="经验" selected>经验</option>
+                            }
+                            else
+                            {
+                                <option value="经验">经验</option>
+                            }
+                            @if (ViewData["Family"].ToString().Equals("前端开发"))
+                            {
+                                <option value="前端开发" checked>前端开发</option>
+                            }
+                            else
+                            {
+                                <option value="前端开发">前端开发</option>
+                            }
+                            @if (ViewData["Family"].ToString().Equals("后端开发"))
+                            {
+                                <option value="后端开发" selected>后端开发</option>
+                            }
+                            else
+                            {
+                                <option value="后端开发">后端开发</option>
+                            }
+                            @if (ViewData["Family"].ToString().Equals("Java"))
+                            {
+                                <option value="Java" selected>Java</option>
+                            }
+                            else
+                            {
+                                <option value="Java">Java</option>
+                            }
+                            @if (ViewData["Family"].ToString().Equals("Python"))
+                            {
+                                <option value="Python" selected>Python</option>
+                            }
+                            else
+                            {
+                                <option value="Python">Python</option>
+                            }
+                            @if (ViewData["Family"].ToString().Equals("其他"))
+                            {
+                                <option value="其他" selected>其他</option>
+                            }
+                            else
+                            {
+                                <option value="其他">其他</option>
+                            }
+                        }
+
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="form-check">
+                    @if(ViewData["IsOriginal"] == null? false:(bool)ViewData["IsOriginal"]){
+                    <input class="form-check-input" type="checkbox" id="gridCheck" name="isoriginal" checked>
+                    }else{
+                    <input class="form-check-input" type="checkbox" id="gridCheck" name="isoriginal">
+                    }
+                    <label class="form-check-label" for="gridCheck">
+                        原创文章
+                    </label>
+                </div>
+            </div>
+            <div id="test-editor" class="mt-4">
+                <textarea style="display:block;" name="content">@(ViewData["Content"] == null? "":ViewData["Content"])</textarea>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    @if(ViewData["Msg"] != null)
+                    {
+                    <span class="text-danger">@ViewData["Msg"]</span>
+                    }
+                </div>
+                <div class="form-group col-md-6">
+                    <div class="text-right">
+                        <button type="submit" class="btn btn-primary mt-2">提交</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,179 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Shared/_Main.cshtml";
+}
+@{
+    Article article = (Article)ViewData["Article"];
+    User user = (User)ViewData["User"];
+    List<Comment> comments = (List<Comment>)ViewData["Comments"];
+    List<User> users = (List<User>)ViewData["Users"];
+}
+<!-- main content begin -->
+<div class="doc-container" id="doc-container">
+    <div class="container-fixed">
+        <!-- 面包屑导航栏 begin -->
+        <div class="layui-row" style="margin-top: 15px;">
+            <div class="layui-col-md12">
+                <div class="home-tips shadow">
+                    <i class="layui-icon"></i>
+                    <span class="layui-breadcrumb" lay-separator=">" style="visibility: visible;">
+                        <a href='/Main/'>主页</a>
+                        <a href='/Article/Article/hot'>热门文章</a>
+                        <a><cite>@article.Title</cite></a>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <!-- 面包屑导航栏 end -->
+        <div class="col-content" style="width:100%">
+            <div class="inner">
+                <article class="article-list">
+                    <input type="hidden" id="blogtypeid" />
+                    <section class="article-item">
+                        <aside class="title" style="line-height:1.5;">
+                            <h4>@article.Title</h4>
+                            <p class="fc-grey fs-14">
+                                <small>
+                                    作者：<a href="#" target="_blank"> @article.User</a>
+                                </small>
+                                <small style="margin-left:10px;">阅读：<i class="readcount">@article.LookCount</i></small>
+                                <small style="margin-left:10px;">更新于 <label>@article.CreateDate</label> </small>
+                            </p>
+                        </aside>
+                        <div class="time mt10" style="padding-bottom:0;">
+                            <span class="day">@article.CreateDate.Day</span>
+                            <span class="month" style="font-size: 18px;">@article.CreateDate.Month<small style="font-size: 14px;">月</small></span>
+                            <span class="year" style="font-size: 18px;">@article.CreateDate.Year</span>
+                        </div>
+                        <div class="content artiledetail" style="padding-bottom: 20px;">
+                            <div id="test-editor" class="mt-4">
+                                <textarea style="display:block">@article.Content</textarea>
+                            </div>
+                            <div class="copyright" style="margin-top:20px;">
+                                <p class="f-toe">
+                                    本文标题：
+                                    <a href="#" class="r-title">@article.Title</a>
+                                </p>
+                                <p class="f-toe">
+                                    本文网址：
+                                    <a href="/Article/Read/@article.Id">/Article/Read/@article.Id</a>
+                                </p>
+                            </div>
+                            <div id="aplayer" style="margin:5px 0"></div>
+                            <h6>延伸阅读</h6>
+                            <ol class="b-relation">
+                                <li class="f-toe">上一篇：<a href="">没有了 </a></li>
+                                <li class="f-toe">下一篇：<a href="">没有了 </a></li>
+                            </ol>
+                            <h6>发表评论</h6>
+                            <!-- 评论区 begin -->
+                            <div class="dedemao-comment">
+                                @if (ViewData["Nick"].ToString().Length > 0)
+                                {
+                                    <div class="dedemao-comment-box">
+                                        <div class="b-box-textarea">
+                                            <form action="/Article/CommentSubmit/" method="post">
+                                                <div class="b-box-textarea-body">
+                                                    <textarea class="b-box-content" contenteditable="true" style="color: rgb(51, 51, 51);" name="comment"></textarea>
+                                                </div>
+                                                <input type="text" value="@article.Id" name="ArticleId" hidden />
+                                                <ul class="b-emote-submit">
+                                                    <li class="b-submit-button">
+                                                        <input type="submit" value="评 论" style="background-color: #08FFC8;">
+                                                    </li>
+                                                    <li class="b-clear-float"></li>
+                                                </ul>
+                                                <div class="error-tip" id="msgBox"></div>
+                                                <div id="progressOuter" class="progress progress-striped active" style="display: none">
+                                                    <div id="progressBar" class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                                                    </div>
+                                                </div>
+                                                <div class="dedemao-img-list"></div>
+                                                <div id="dedemao-upload-box" style="display: none"></div>
+                                            </form>
+                                        </div>
+                                        <div class="b-clear-float"></div>
+                                    </div>
+                                }
+                                <div class="dedemao-comment-title" style="border-bottom: 1px solid #08FFC8;">
+                                    <ul class="row" style="display:block">
+                                        <li class="" style="float: left;">
+                                            <h5 class="custom-title">
+                                                <i class="fa fa-comments-o fa-fw icon"></i>
+                                                <span style="color: #cccccc"> | </span>
+                                                <strong>
+                                                    <span class="comment-count" style="color: #2C662D">@ViewData["CommentCount"]</span>&nbsp;评论
+                                                </strong>
+                                            </h5>
+                                        </li>
+                                        <li class=" text-right" style="float: right;">
+                                            <span class="icon2">
+                                                <input type="radio" name="commentorder" id="commentnew" checked="checked">
+                                                <label for="commentnew">最新</label>
+                                                <input type="radio" name="commentorder" id="commentlatest">
+                                                <label for="commentlatest">最早</label>
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class=" b-user-comment">
+                                    <div class="row b-user b-parent comm_list" style="display:block">
+                                        <ul class="list" id="ulcommentlist">
+                                            @for (int i = 0; i < comments.Count; i++)
+                                            {
+                                                <li class="entry zoomIn">
+                                                    <div class="adiv">
+                                                        <div><img class="headerimage" src="~/image/img.jpg"></div>
+                                                    </div>
+                                                    <div>
+                                                        <div class="info rmp">
+                                                            <strong class="p_floor">@(i + 1)楼</strong>
+                                                            <div class="nmp">
+                                                                <span class="nick">@users[i].Nick</span>
+                                                                <span class="posandtime">
+                                                                    网友&nbsp;@comments[i].CreateDate
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="comm">
+                                                            <p>@comments[i].Content</p>
+                                                        </div>
+                                                        @if (ViewData["Nick"].ToString().Length > 0)
+                                                        {
+                                                            <div class="zhiChi">
+                                                                <span class="comm_reply">
+                                                                    <a class="s commentVote" href="#">
+                                                                        支持(<span id="goodfb544">@comments[i].StarCount</span>)
+                                                                    </a><a href="#" username="禁止香菜">回复</a>
+                                                                </span>
+                                                            </div>
+                                                        }
+                                                    </div>
+                                                </li>
+                                            }
+                                        </ul>
+                                    </div>
+                                    <div class="row" style="display:block">
+                                        <div class="">
+                                            <div class="b-border"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" style="display:block">
+                                    <div class="">
+                                        <div class="b-border"></div>
+                                    </div>
+                                </div>
+                                <div class="section-page-w"></div>
+                            </div>
+                            <!-- 评论区 end -->
+                        </div>
+                    </section>
+                </article>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- main content end -->

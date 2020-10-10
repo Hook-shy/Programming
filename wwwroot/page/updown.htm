@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8">
+    <title>上传下载</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../Content/bootstrap.min.css">
+    <link rel="stylesheet" href="../Site.css">
+    <link rel="stylesheet" href="../Content/upload.css">
+    <link rel="stylesheet" href="../Content/style.css" media="screen" />
+    <link rel="stylesheet" href="../Content/responsive.css" media="screen" />
+    <link rel="stylesheet" id="style-color" href="../Content/colors/bacgroudcolor.css" media="screen" />
+    <link rel="stylesheet" href="../Content/font-awesome/font-awesome.min.css" media="screen" />
+</head>
+
+<body>
+    <header id="apeak_header">
+        <div class="nav-bar">
+            <nav class="navbar navbar-expand-lg navbar-light navbar-apeak fixed-top">
+                <div class="container">
+                    <a href="#" class="navbar-brand d-flex justify-content-center aligin-items-center">
+                        <img src="../Images/logo.png" alt="">
+                    </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#apeak_nav"
+                        aria-controls="apeak_nav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="apeak_nav">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item active">
+                                <a href="#" class="nav-link">首页<span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    编程文章
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="#">最新文章</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">热门文章</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">社团动态</a>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" target="_blank">代码空间</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" target="_blank">团队任务</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" target="_blank">精彩论坛</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="row">
+                        <div class=" d-lg-block">
+                            <!-- <a class="btn btn-sm" href="../Views/login.htm">注册</a>
+                            <span class="text-muted">|</span>
+                            <a href="../Views/login.htm" class="ml-2 text-muted">登录</a> -->
+                            <div class="col-lg-2" style="background: #354144">
+                                <div class="right">
+                                    <ul class="nav navbar-nav ">
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                                                style="height: 60px">
+                                                <img alt="" class="img-circle mr-3" src="../Images/tx.jpg" width="38px"
+                                                    height="38px" />
+                                                <span style="color: #FFFFFF;font-size: 15px">
+                                                    <i>username</i>
+                                                </span>
+                                            </a>
+                                            <div class="dropdown-menu pull-right"
+                                                style="background: #FFFFFF;width: 320px;overflow: hidden">
+                                                <div style="margin-top: 16px;border-bottom: 1px solid #eeeeee">
+                                                    <div style="text-align: center">
+                                                        <img class="img-circle" src="../Images/tx.jpg"
+                                                            style="width: 38px;height: 38px;" />
+                                                    </div>
+                                                    <div
+                                                        style="color: #323534;text-align: center;line-height: 36px;font-size: 15px">
+                                                        <span>username</span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row"
+                                                    style="margin-left: 15px;margin-right: 15px;margin-top: 10px">
+                                                    <div class="col-4  text-center grid0">
+                                                        <i class="fa fa-user"
+                                                            style="font-size: 25px;line-height: 45px;"></i>
+                                                        <p
+                                                            style="padding: 0px;margin-top: 6px;margin-bottom: 10px;font-size: 12px">
+                                                            个人中心</p>
+                                                    </div>
+                                                    <div class="col-4 text-center grid0">
+                                                        <i class="fa fa-gear"
+                                                            style="font-size: 25px;line-height: 45px;"></i>
+                                                        <p
+                                                            style="padding: 0px;margin-top: 6px;margin-bottom: 10px;font-size: 12px">
+                                                            账号管理</p>
+                                                    </div>
+                                                    <div class="col-4 text-center grid0">
+                                                        <i class="fa fa-key"
+                                                            style="font-size: 25px;line-height: 45px;"></i>
+                                                        <p
+                                                            style="padding: 0px;margin-top: 6px;margin-bottom: 10px;font-size: 12px">
+                                                            密码修改</p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row"
+                                                    style="margin-left: 15px;margin-right: 15px;margin-top: 10px">
+                                                    <div class="col-4 text-center grid0">
+                                                        <i class="fa fa-user-circle"
+                                                            style="font-size: 25px;line-height: 45px;"></i>
+                                                        <p
+                                                            style="padding: 0px;margin-top: 6px;margin-bottom: 10px;font-size: 12px">
+                                                            修改头像</p>
+                                                    </div>
+                                                    <div class="col-4 text-center grid0">
+                                                        <i class="fa fa-comments"
+                                                            style="font-size: 25px;line-height: 45px;"></i>
+                                                        <p
+                                                            style="padding: 0px;margin-top: 6px;margin-bottom: 10px;font-size: 12px">
+                                                            消息</p>
+                                                    </div>
+                                                    <div class="col-4 text-center grid0">
+                                                        <i class="fa fa-heart-o"
+                                                            style="font-size: 25px;line-height: 45px;"></i>
+                                                        <p
+                                                            style="padding: 0px;margin-top: 6px;margin-bottom: 10px;font-size: 12px;">
+                                                            帮助中心</p>
+                                                    </div>
+                                                </div>
+
+                                                <div style="margin-top: 16px">
+                                                    <div
+                                                        style="padding: 15px;text-align: center;background: #f6f5f5;color: #323534;">
+                                                        <i class="fa fa-sign-out" style="cursor:pointer">退出登入界面</i>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </nav>
+        </div>
+    </header>
+    <div id="container">
+        <!-- main container starts-->
+        <div id="wrapp">
+            <!-- main wrapp starts-->
+
+            <div id="content">
+                <div id="breadcrumb">
+                    <!-- breadcrumb starts-->
+                    <div class="container">
+                        <div class="one-half">
+                            <h4>资源共享</h4>
+                        </div>
+                        <div class="one-half">
+                            <nav id="breadcrumbs">
+                                <!--breadcrumb nav starts-->
+                                <ul>
+                                    <li>你的位置:</li>
+                                    <li><a href="index.htm">首页</a></li>
+                                    <li>资源共享</li>
+                                </ul>
+                            </nav>
+                            <!--breadcrumb nav ends -->
+                        </div>
+                    </div>
+                </div>
+                <!--breadcrumbs ends -->
+                <div class="container">
+                    <ul id="filterable">
+                        <li><a data-categories="one">下载首页</a></li>
+                        <li><a data-categories="my_download">我的下载</a></li>
+                        <li><a data-categories="my_upload">我的上传</a></li>
+                        <li><a data-categories="upload_file">上传</a></li>
+                    </ul>
+
+                    <ul id="portfolio-container" class="four-columns">
+
+                        <li class="isotope-item" data-categories="one">
+                            <div class="item-wrapp">
+                                <div class="portfolio-item">
+                                    <a href="#" class="item-permacenter"><i class="icon-download"></i></a>
+                                    <img src="../images/portfolio/portfolio-item-12.jpg" alt="" />
+                                </div>
+                                <div class="portfolio-item-title">
+                                    <a href="#">python爬取中国天气网</a>
+                                    <p> 爬虫 / Python / pdf</p>
+                                    <img src="../images/bacgroud1.jpg" alt="" style="width: 20px;height:20px">
+                                    <span>tushan</span>
+                                    <span>21.3KB</span>
+                                    <span><i class="icon-download"></i>555</span>
+
+                                </div>
+                            </div>
+                        </li>
+                        <li class="isotope-item" data-categories="my_download one">
+                            <div class="item-wrapp">
+                                <div class="portfolio-item">
+                                    <a href="#" class="item-permacenter"><i class="icon-download"></i></a>
+                                    <img src="../images/portfolio/portfolio-item-12.jpg" alt="" />
+                                </div>
+                                <div class="portfolio-item-title">
+                                    <a href="#">web响应式设计设计</a>
+                                    <p>
+                                        前端 / JavaScript
+                                    </p>
+                                    <img src="../images/bacgroud1.jpg" alt="" style="width: 20px;height:20px">
+                                    <span>tushan</span>
+                                    <span>21.3KB</span>
+                                    <span><i class="icon-download"></i>555</span>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="isotope-item" data-categories="my_download one">
+                            <div class="item-wrapp">
+                                <div class="portfolio-item">
+                                    <a href="#" class="item-permacenter"><i class="icon-download"></i></a>
+                                    <img src="../images/portfolio/portfolio-item-12.jpg" alt="" />
+                                </div>
+                                <div class="portfolio-item-title">
+                                    <a href="#">UI设计</a>
+                                    <p>
+                                        UI / 设计
+                                    </p>
+                                    <img src="../images/bacgroud1.jpg" alt="" style="width: 20px;height:20px">
+                                    <span>tushan</span>
+                                    <span>21.3KB</span>
+                                    <span><i class="icon-download"></i>555</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="isotope-item" data-categories=" my_upload one">
+                            <div class="item-wrapp">
+                                <div class="portfolio-item">
+                                    <a href="#" class="item-permalink"><i class="icon-download"></i></a>
+                                    <a href="#" class="item-preview"><i class="icon-trash"></i></a>
+                                    <img src="../images/portfolio/portfolio-item-12.jpg" alt="" />
+                                </div>
+                                <div class="portfolio-item-title">
+                                    <a href="#">产品经理</a>
+                                    <p>
+                                        产品 / 设计
+                                    </p>
+                                    <img src="../images/bacgroud1.jpg" alt="" style="width: 20px;height:20px">
+                                    <span>tushan</span>
+                                    <span>21.3KB</span>
+                                    <span><i class="icon-download"></i>555</span>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="isotope-item" data-categories="my_upload one">
+                            <div class="item-wrapp">
+                                <div class="portfolio-item">
+                                    <a href="#" class="item-permalink"><i class="icon-download"></i></a>
+                                    <a href="#" class="item-preview"><i class="icon-trash"></i></a>
+                                    <img src="../images/portfolio/portfolio-item-12.jpg" alt="" />
+                                </div>
+                                <div class="portfolio-item-title">
+                                    <a href="#">技术栈</a>
+                                    <p>
+                                        技术栈 / 后端
+                                    </p>
+                                    <img src="../images/bacgroud1.jpg" alt="" style="width: 20px;height:20px">
+                                    <span>tushan</span>
+                                    <span>21.3KB</span>
+                                    <span><i class="icon-download"></i>555</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="isotope-item" data-categories="upload_file ">
+                            <div class="upload">
+                                <div class="upload-files">
+                                    <header>
+                                        <p>
+                                            <i class="fa fa-cloud-upload" aria-hidden="true"></i>
+                                            <span class="up">up</span>
+                                            <span class="load">load</span>
+                                        </p>
+                                    </header>
+                                    <div class="body" id="drop">
+                                        <i class="fa fa-file-text-o pointer-none" aria-hidden="true"></i>
+                                        <p class="pointer-none"><b>拖放到这里</b> files here <br /> or <a href=""
+                                                id="triggerFile">浏览</a>开始上传</p>
+                                        <input type="file" multiple="multiple" />
+                                    </div>
+                                    <footer>
+                                        <div class="divider">
+                                            <span>
+                                                <AR>FILES</AR>
+                                            </span>
+                                        </div>
+                                        <div class="list-files">
+                                            <!--   template   -->
+                                        </div>
+                                        <button class="importar">UPDATE FILES</button>
+                                    </footer>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="isotope-item" data-categories="upload_file">
+
+                            <form>
+                                <div class="form-group">
+                                    <label for="exampleFormControlInput1">资源名称</label>
+                                    <input type="text" class="form-control" id="exampleFormControlInput1"
+                                        placeholder="如：计算机科学与技术">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleFormControlSelect1">资源类型</label>
+                                    <select class="form-control" id="exampleFormControlSelect1">
+                                        <option>工具</option>
+                                        <option>文档</option>
+                                        <option>代码</option>
+                                        <option>影音</option>
+                                        <option>其他</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleFormControlTextarea1">资源描述</label>
+                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="2"></textarea>
+                                </div>
+                                <button class="btn btn-info" type="submit">提交</button>
+                            </form>
+
+
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- main wrapp starts-->
+    </div>
+    <!-- main container ends-->
+
+
+    <!-- ----------------------------尾部begin----------------------------------------- -->
+    <footer id="apeak_footer">
+        <div class="container">
+            <div class="row d-flex justify-content-between align-items-center">
+                <div class="col-lg-4 d-none d-sm-none d-md-none d-lg-block">
+                    <div class="row  d-flex justify-content-center align-items-center">
+                        <ul class="offset-lg-2 col-lg-4">
+                            <li><a href="">关于我们</a></li>
+                            <li><a href="">社团动态</a></li>
+                            <li><a href="">精彩论坛</a></li>
+                        </ul>
+                        <ul class="col-lg-4">
+                            <li><a href="">团队合作</a></li>
+                            <li><a href="">在线代码</a></li>
+                            <li><a href="">联系我们</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-5 text-center">
+                    <h6>学校地址: 云南财经大学</h6>
+                    <h6>联系电话: 123348875</h6>
+                    <h6>地址邮箱: 12345678@qq.com</h6>
+                </div>
+                <div class="col-md-6 col-lg-3 d-none d-sm-none d-md-block">
+                    <h6>联系我们:</h6>
+                    <a href=""><img src="../Images/weixin-h.png" width="50" alt="" data-toggle="tooltip"
+                            data-placement="bottom" title="itlike001"></a>
+                    <a href=""><img src="../Images/xinlang-h.png" width="50" alt="" data-toggle="tooltip"
+                            data-placement="bottom" title="weibo"></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- ----------------------------尾部end----------------------------------------- -->
+    <script src="../Site.css"></script>
+    <script src="../Scripts/jquery-3.4.1.js"></script>
+    <script src="../Scripts/popper.js"></script>
+    <script src="../Scripts/bootstrap.js"></script>
+    <script src="../Scripts/upload.js"></script>
+
+    <script type="text/javascript" src="../Scripts/jquery.min.js"></script>
+    <script type="text/javascript" src="http//code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script type="text/javascript" src="../Scripts/jquery.tooltips.min.js"></script>
+    <script type="text/javascript" src="../Scripts/isotope.min.js"></script>
+    <script type="text/javascript" src="../Scripts/custom.js"></script>
+</body>
+
+</html>

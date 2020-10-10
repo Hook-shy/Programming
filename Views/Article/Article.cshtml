@@ -1,0 +1,127 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Shared/_Main.cshtml";
+}
+@{ 
+    List<Article> newArticles = (List<Article>)ViewData["NewArticleList"];
+    List<Article> hotArticles = (List<Article>)ViewData["HotArticleList"];
+}
+<div class="doc-container" id="doc-container">
+    <div class="container-fixed">
+        <div class="col-content">
+            <div class="inner">
+                <article class="article-list bloglist" id="LAY_bloglist">
+                    @foreach (var article in (List<Article>)ViewData["ArticleList"])
+                    {
+                        <section class="article-item zoomIn article">
+                            @if (article.IsTop)
+                            {
+                                <div class="fc-flag">置顶</div>
+                            }
+                            <h5 class="title">
+                                @if (article.IsOriginal)
+                                {
+                                    <span class="text-primary">【原创】</span>
+                                }
+                                <a href="/Article/Read/@article.Id">@article.Title</a>
+                            </h5>
+                            <div class="time">
+                                <span class="day">@article.CreateDate.Day</span>
+                                <span class="month" style="font-size:18px;">@article.CreateDate.Month<span style="font-size:14px;">月</span></span>
+                                <span class="year ml10" style="font-size:18px;">@article.CreateDate.Year</span>
+                            </div>
+                            <div class="content">
+                                @article.Content.Substring(0, article.Content.Length >= 500 ? 500 : article.Content.Length - 1)...
+                            </div>
+                            <div class="read-more">
+                                <a href="/Article/Read/@article.Id" class="fc-black f-fwb">阅读</a>
+                            </div>
+                            <aside class="footer">
+                                <div class="f-fl tags" style="display:inline">
+                                    <span class="fa fa-tags" style="font-size:16px;"></span>
+                                    <a src="Article/Article/@article.Family" class="tag">@article.Family</a>
+                                </div>
+                                <div style="display:inline;float:right;">
+                                    <span class="read">
+                                        <i class="fa fa-eye" style="font-size:16px;"></i>
+                                        <i class="num">@article.LookCount</i>
+                                    </span>
+                                    <span style="margin-left:20px;">
+                                        <i class="fa fa-comments" style="font-size:16px;"></i>
+                                        <a href="#" class="num fc-grey">@article.CommentCount</a>
+                                    </span>
+                                </div>
+                            </aside>
+                        </section>
+                    }
+                </article>
+            </div>
+        </div>
+        <div class="col-other">
+            <div class="inner">
+                <div class="other-item" id="categoryandsearch">
+                    <div class="write">
+                        <a class="btn-epic" href="@(ViewData["Nick"].ToString().Length > 0 ? "/Article/Editor": "#")">
+                            <div><span>写文章</span><span>Write an article</span></div>
+                        </a>
+                    </div>
+                    <div class="search">
+                        <label class="search-wrap">
+                            <input type="text" id="searchtxt" placeholder="输入关键字搜索" />
+                            <span class="search-icon">
+                                <i class="fa fa-search"></i>
+                            </span>
+                        </label>
+                        <ul class="search-result"></ul>
+                    </div>
+                    <ul class="category mt20" id="category">
+                        <li data-index="0" class="slider"></li>
+                        <li data-index="1"><a href="/Article/Article/">全部文章</a></li>
+                        <li data-index="2"><a href="/Article/Article/Java">Java</a></li>
+                        <li data-index="3"><a href="/Article/Article/前端">前端</a></li>
+                        <li data-index="4"><a href="/Article/Article/Python">Python</a></li>
+                        <li data-index="5"><a href="/Article/Article/PHP">PHP</a></li>
+                        <li data-index="6"><a href="/Article/Article/其他">其它</a></li>
+                    </ul>
+                </div>
+                <!--右边悬浮 平板或手机设备显示-->
+                <div class="category-toggle"><i class="layui-icon">&#xe603;</i></div>
+                <div class="article-category">
+                    <div class="article-category-title">分类导航</div>
+                    <a href="/Article/Article/Java">Java</a>
+                    <a href="/Article/Article/前端">前端</a>
+                    <a href="/Article/Article/Python">Python</a>
+                    <a href="/Article/Article/PHP">PHP</a>
+                    <a href="/Article/Article/其他">其它</a>
+                    <div class="f-cb"></div>
+                </div>
+                <!--遮罩-->
+                <div class="blog-mask animated layui-hide"></div>
+                <div class="other-item">
+                    <h5 class="other-item-title">热门文章</h5>
+                    <div class="inner">
+                        <ul class="hot-list-article">
+                            @foreach(Article hotarticle in hotArticles)
+                            {
+                                <li> <a href="/Article/Read/@hotarticle.Id">@hotarticle.Title</a></li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+                <div class="other-item">
+                    <h5 class="other-item-title">最新文章</h5>
+                    <div class="inner">
+                        <ul class="hot-list-article">
+                            @foreach (Article newarticle in newArticles)
+                            {
+                                <li> <a href="/Article/Read/@newarticle.Id">@newarticle.Title</a></li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

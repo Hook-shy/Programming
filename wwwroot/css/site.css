@@ -1,0 +1,73 @@
+/* *******************************头部begin*********************************** */
+#apeak_header .navbar-apeak {
+    border-bottom: 1px solid #e0e0e0;
+    background-color: #08ffc8;
+}
+
+    #apeak_header .navbar-apeak .navbar-brand {
+        height: 90px;
+        margin-left: 15px;
+        margin-right: 80px;
+    }
+
+        #apeak_header .navbar-apeak .navbar-brand img {
+            width: 80px;
+            height: 80px;
+        }
+
+    #apeak_header .navbar-apeak .navbar-nav > li > a {
+        height: 70px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 20px;
+    }
+
+        #apeak_header .navbar-apeak .navbar-nav > li > a:hover {
+            border-bottom: 2px solid #204969;
+        }
+
+
+/* *******************************头部end*********************************** */
+
+/* *******************************尾部begin*********************************** */
+#apeak_footer {
+    margin-top: 20px;
+    width: 100%;
+    height: 200px;
+    background: url("../image/btbg.png") no-repeat;
+    color: #000;
+}
+
+    #apeak_footer .container .row {
+        /*background-color: red;*/
+        height: 200px;
+    }
+
+        #apeak_footer .container .row a {
+            color: #000;
+        }
+/* *******************************尾部end*********************************** */
+
+
+/* *******************************个人头像begin*********************************** */
+#apeak_article_duty .nav > li > a:hover {
+    color: #262626;
+    text-decoration: none;
+    background-color: rgb(196, 252, 242);
+}
+
+.open > a {
+    background-color: #354144 !important;
+}
+
+.right {
+    float: right;
+}
+
+.grid0:hover {
+    background: #efefef;
+    cursor: pointer;
+}
+/* *******************************个人头像end*********************************** */
+
