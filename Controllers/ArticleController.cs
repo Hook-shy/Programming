@@ -29,13 +29,13 @@ namespace Programming.Controllers
         {
             string sessionCode = "";
             Request.Cookies.TryGetValue("SessionCode", out sessionCode);
-            ViewData["Nick"] = "";
+            ViewData["User"] = null;
             if (!string.IsNullOrEmpty(sessionCode))
             {
                 User user = UserServer.CheckSessionCode(sessionCode, _usercontext);
                 if (user != null)
                 {
-                    ViewData["Nick"] = user.Nick;
+                    ViewData["User"] = user;
                 }
             }
             int count = _articlecontext.Articles.AsEnumerable().Count();
@@ -55,6 +55,7 @@ namespace Programming.Controllers
                 List<Article> articles = _articlecontext.Articles.AsEnumerable().Where(a => a.Title.IndexOf(key) >= 0 || a.KeyWord.IndexOf(key) >= 0 || a.Family.IndexOf(key) >= 0 || a.Content.IndexOf(key) >= 0).OrderBy(a => a.LookCount).Reverse().ToList();
                 ViewData["ArticleList"] = articles.GetRange(0, articles.Count > 10 ? 10 : articles.Count);
             }
+            ViewData["Title"] = "一站式编程学习平台|文章";
             ViewData["Controller"] = "Article";
             ViewData["Action"] = "Article";
             return View();
@@ -65,13 +66,13 @@ namespace Programming.Controllers
         {
             string sessionCode = "";
             Request.Cookies.TryGetValue("SessionCode", out sessionCode);
-            ViewData["Nick"] = "";
+            ViewData["User"] = null;
             if (!string.IsNullOrEmpty(sessionCode))
             {
                 User user = UserServer.CheckSessionCode(sessionCode, _usercontext);
                 if (user != null)
                 {
-                    ViewData["Nick"] = user.Nick;
+                    ViewData["User"] = user;
                 }
             }
             Article article = _articlecontext.Articles.AsEnumerable().FirstOrDefault(a => a.Id == id);
@@ -89,6 +90,7 @@ namespace Programming.Controllers
                 users.Add(_usercontext.Users.AsEnumerable().FirstOrDefault(u => u.Id == comment.UserId));
             }
             ViewData["Users"] = users;
+            ViewData["Title"] = "一站式编程学习平台|文章";
             ViewData["Controller"] = "Article";
             ViewData["Action"] = "Read";
             return View();
@@ -98,15 +100,16 @@ namespace Programming.Controllers
         {
             string sessionCode = "";
             Request.Cookies.TryGetValue("SessionCode", out sessionCode);
-            ViewData["Nick"] = "";
+            ViewData["User"] = null;
             if (!string.IsNullOrEmpty(sessionCode))
             {
                 User user = UserServer.CheckSessionCode(sessionCode, _usercontext);
                 if (user != null)
                 {
-                    ViewData["Nick"] = user.Nick;
+                    ViewData["User"] = user;
                 }
             }
+            ViewData["Title"] = "一站式编程学习平台|写文章";
             ViewData["Controller"] = "Article";
             ViewData["Action"] = "Editor";
             return View();
@@ -117,7 +120,7 @@ namespace Programming.Controllers
         {
             string sessionCode = "";
             Request.Cookies.TryGetValue("SessionCode", out sessionCode);
-            ViewData["Nick"] = "";
+            ViewData["User"] = null;
             if (!string.IsNullOrEmpty(sessionCode))
             {
                 User user = UserServer.CheckSessionCode(sessionCode, _usercontext);
@@ -171,13 +174,12 @@ namespace Programming.Controllers
             Debug.WriteLine(parameter.Comment);
             string sessionCode = "";
             Request.Cookies.TryGetValue("SessionCode", out sessionCode);
-            ViewData["Nick"] = "";
+            ViewData["User"] = null;
             if (!string.IsNullOrEmpty(sessionCode))
             {
                 User user = UserServer.CheckSessionCode(sessionCode, _usercontext);
                 if (user != null)
                 {
-                    ViewData["Nick"] = user.Nick;
                     ViewData["User"] = user;
                     if (parameter.Comment != null && !String.IsNullOrEmpty(parameter.Comment))
                     {

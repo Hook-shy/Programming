@@ -21,16 +21,17 @@ namespace Programming.Controllers
         {
             string sessionCode = "";
             Request.Cookies.TryGetValue("SessionCode", out sessionCode);
-            ViewData["Nick"] = "";
+            ViewData["User"] = null;
             if (!string.IsNullOrEmpty(sessionCode))
             {
                 User user = UserServer.CheckSessionCode(sessionCode, _usercontext);
                 if (user != null)
                 {
-                    ViewData["Nick"] = user.Nick;
+                    ViewData["User"] = user;
                     return View();
                 }
             }
+            ViewData["Title"] = "一站式编程学习平台|代码空间";
             return RedirectToAction("Login", "Login");
         }
     }

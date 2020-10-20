@@ -1,171 +1,176 @@
-
 /*标题*/
+
 .am-text-lg {
-  font-size: 18px;
+    font-size: 18px;
 }
 
 .col-main {
-  padding-top: 40px;
-  background-color: #fff;
-  padding-bottom: 40px;
+    padding-top: 40px;
+    background-color: #fff;
+    padding-bottom: 40px;
 }
 
 .user-info {
-  width: 100%;
-  overflow: hidden;
+    width: 100%;
+    overflow: hidden;
 }
 
+
 /*表单布局*/
+
 .am-form-label {
-  width: 100px;
-  float: left;
+    width: 100px;
+    float: left;
 }
 
 .am-form-content {
-  margin-left: 85px;
+    margin-left: 85px;
 }
 
+
 /* CSS Document */
+
 [class*="am-u-"] {
-  padding-left: 0;
-  padding-right: 0;
+    padding-left: 0;
+    padding-right: 0;
 }
 
 .user-infoPic {
-  overflow: hidden;
-  position: relative;
-  margin: 0px 10px;
-  padding: 0px 5px 0px 0px;
-  border-bottom: 1px solid #E4EAEE;
+    overflow: hidden;
+    position: relative;
+    margin: 0px 10px;
+    padding: 0px 5px 0px 0px;
+    border-bottom: 1px solid #E4EAEE;
+    cursor: pointer;
 }
 
 .filePic {
-  position: relative;
-  width: 60px;
-  text-align: center;
-  float: right;
+    position: relative;
+    width: 60px;
+    text-align: center;
+    float: right;
 }
 
 .inputPic {
-  cursor: pointer;
-  opacity: 0;
-  ilter: alpha(opacity=0);
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 9;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 9;
 }
 
 p.am-form-help {
-  font-size: 14px;
-  font-weight: 600;
-  margin: 0px auto;
-  position: absolute;
-  top: 25px;
-  color: #000000;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0px auto;
+    position: absolute;
+    top: 25px;
+    color: #000000;
 }
 
 .am-selected-list {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 .am-img-thumbnail {
-  padding: 0px;
-  margin: 2px;
+    padding: 0px;
+    margin: 2px;
 }
 
 .info-m {
-  display: none;
+    display: none;
 }
 
+
 /*修改信息*/
+
 .info-main {
-  max-width: 800px;
-  padding: 0px 10px;
+    max-width: 800px;
+    padding: 0px 10px;
 }
 
 .am-form-group {
-  margin: 10px 0px;
-  border-bottom: 1px solid #E4EAEE;
-  height: 34px;
+    margin: 10px 0px;
+    border-bottom: 1px solid #E4EAEE;
+    height: 34px;
 }
 
 .am-form-horizontal .am-form-label {
-  padding-top: 8px;
-  text-align: left;
+    padding-top: 8px;
+    text-align: left;
 }
-
 
 
 /*按钮*/
-.info-btn {
-  text-align: center;
-}
 
+.info-btn {
+    text-align: center;
+}
 
 .am-form-label {
-  font-size: 14px;
-  font-weight: 600;
-  width: auto;
+    font-size: 14px;
+    font-weight: 600;
+    width: auto;
 }
 
-
-  .am-radio-inline input[type="radio"] {
+.am-radio-inline input[type="radio"] {
     margin-left: 0px;
-  }
+}
 
-  input::-webkit-input-placeholder,
-  input {
+input::-webkit-input-placeholder,
+input {
     text-align: left;
-  }
+}
 
-  .info-main {
+.info-main {
     margin: 0% 5%;
-  }
+}
 
-  .user-infoPic,
-  .am-form-group {
+.user-infoPic,
+.am-form-group {
     border: none;
-  }
+}
 
-
-  input {
+input {
     text-align: left;
-  }
+}
 
-  .am-form-group {
+.am-form-group {
     height: 50px;
-  }
+}
 
-  .am-form-horizontal .am-form-label {
+.am-form-horizontal .am-form-label {
     padding-top: 8px;
-  }
+}
 
-  .am-form-content small {
+.am-form-content small {
     display: block;
     margin: 5px 5px;
     color: #ccc;
-  }
+}
 
 
-  /*头像*/
-  .user-infoPic {
+/*头像*/
+
+.user-infoPic {
     position: relative;
     margin: 20px 5% 50px;
     height: 130px;
     border-bottom: 1px solid #eee;
-  }
+}
 
-  .filePic {
+.filePic {
     width: 100px;
     float: left;
     margin-left: 15px;
     margin-top: 15px;
-  }
+}
 
-  .info-m {
+.info-m {
     display: block;
     float: left;
     overflow: hidden;
@@ -174,5 +179,76 @@ p.am-form-help {
     left: 6%;
     top: 25px;
     margin-left: 120px;
-  }
+}
 
+.avatar-body {
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.avatar-wrapper {
+    height: 364px;
+    width: 100%;
+    margin-top: 15px;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, .25);
+    background-color: #fcfcfc;
+    overflow: hidden;
+}
+
+.avatar-wrapper img {
+    display: block;
+    height: auto;
+    max-width: 100%;
+}
+
+.avatar-preview {
+    float: left;
+    margin-top: 15px;
+    margin-right: 15px;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    background-color: #fff;
+    overflow: hidden;
+    max-width: 600px;
+    max-height: 364px;
+}
+
+.avatar-preview:hover {
+    border-color: #ccf;
+    box-shadow: 0 0 5px rgba(0, 0, 0, .15);
+}
+
+.avatar-preview img {
+    width: 100%;
+}
+
+.preview-lg {
+    height: 184px;
+    width: 184px;
+    margin-top: 15px;
+}
+
+.preview-md {
+    height: 100px;
+    width: 100px;
+}
+
+.preview-sm {
+    height: 50px;
+    width: 50px;
+}
+
+@media (min-width: 992px) {
+    .avatar-preview {
+        float: none;
+    }
+}
+
+.avatar-btns {
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+.avatar-btns .btn-group {
+    margin-right: 5px;
+}

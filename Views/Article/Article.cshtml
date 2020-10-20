@@ -4,9 +4,14 @@
 @{
     Layout = "~/Views/Shared/_Main.cshtml";
 }
-@{ 
+@{
     List<Article> newArticles = (List<Article>)ViewData["NewArticleList"];
     List<Article> hotArticles = (List<Article>)ViewData["HotArticleList"];
+    User user = null;
+    if (ViewData["User"] != null)
+    {
+        user = (User)ViewData["User"];
+    }
 }
 <div class="doc-container" id="doc-container">
     <div class="container-fixed">
@@ -63,7 +68,7 @@
             <div class="inner">
                 <div class="other-item" id="categoryandsearch">
                     <div class="write">
-                        <a class="btn-epic" href="@(ViewData["Nick"].ToString().Length > 0 ? "/Article/Editor": "#")">
+                        <a class="btn-epic" href="@(user != null ? "/Article/Editor": "#")">
                             <div><span>写文章</span><span>Write an article</span></div>
                         </a>
                     </div>
@@ -103,7 +108,7 @@
                     <h5 class="other-item-title">热门文章</h5>
                     <div class="inner">
                         <ul class="hot-list-article">
-                            @foreach(Article hotarticle in hotArticles)
+                            @foreach (Article hotarticle in hotArticles)
                             {
                                 <li> <a href="/Article/Read/@hotarticle.Id">@hotarticle.Title</a></li>
                             }
@@ -125,3 +130,4 @@
         </div>
     </div>
 </div>
+

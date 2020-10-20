@@ -10,6 +10,7 @@ namespace Programming.Controllers
     {
         public IActionResult Index()
         {
+            ViewData["Title"] = "一站式编程学习平台|管理";
             return View();
         }
     }

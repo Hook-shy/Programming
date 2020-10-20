@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="zh-cn">
+
+<head>
+    <title>信息学院知识竞赛|正式比赛</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../lib/css/bootstrap.css">
+    <link rel="stylesheet" href="../css/match.css">
+    <title></title>
+    <link rel="shortcut icon" href="../images/lk_logo.png" type="image/x-icon">
+</head>
+
+<body>
+    <!--------------------头部-begin------------------------------>
+    <section id="p_header">
+        <!-- 面包屑 -->
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb ol1 font-weight-light">
+                <li class="breadcrumb-item "><a href="../index.html"><small>首页</small></a></li>
+                <li class="breadcrumb-item active" aria-current="page"><small>正式比赛<span id="userinfo"></span></small>
+                </li>
+            </ol>
+        </nav>
+
+        <!-- 卡片 -->
+        <div class="card">
+            <div class="card-body text-center h_card">
+                <h5>正式比赛</h5>
+
+                <h6>
+                    <br>
+                    <span id="time"></span>
+                </h6>
+            </div>
+            <!-- <div class="text-center mb-1">00.00</div> -->
+        </div>
+        <!-- 进度条 -->
+        <div class="progress">
+            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%"
+                aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="m_progress"></div>
+        </div>
+    </section>
+
+    <!--------------------头部-end------------------------------>
+    <!--------------------题目-begin------------------------------>
+
+    <section id="timu">
+
+        <div class="alert" role="alert">
+            <div class="container">
+                <div class="row justify-content-lg-left ">
+                    <h5 class="alert-heading text-left col-lg-10 offset-lg-1" id="question_title"></h5>
+                </div>
+
+                <!-- 选项            -->
+                <div class="container">
+                    <div class="row justify-content-lg-center ">
+                        <div class="list-group col-lg-10 offset-lg-1" id="question_options">
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-center offset-lg-3 offset-md-2 mt-4">
+                        <div class="col-4">
+                            <button type="button" class="btn btn-outline-primary btn-sm "
+                                id="back_question">上一题</button>
+                        </div>
+                        <div class="col-4">
+                            <button type="button" class="btn btn-outline-primary btn-sm "
+                                id="next_question">下一题</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--------------------提示-begin------------------------------>
+            <div style="position: fixed;margin: auto;left: 0;right: 0;top: 0;width: 200px;height: 200px;">
+                <div role="alert" aria-live="assertive" aria-atomic="true" class="toast"
+                    style="min-height: 80px;min-width: 200px;" data-autohide="false" id="tipswindow">
+                    <div class="toast-header">
+                        <strong class="mr-auto">提示</strong>
+                        <small>正式比赛</small>
+                        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="toast-body" id="tipscontent">
+                        距离比赛结束只有10秒钟了！
+                    </div>
+                </div>
+            </div>
+            <!--------------------提示-end------------------------------>
+
+    </section>
+    <!--------------------题目-end------------------------------>
+
+
+
+
+    <script src="../lib/js/jquery-3.3.1.js"></script>
+    <script src="../lib/js/popper.js"></script>
+    <script src="../lib/js/bootstrap.js"></script>
+    <script src="../js/match.js"></script>
+</body>
+
+</html>

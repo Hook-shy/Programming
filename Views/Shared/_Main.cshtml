@@ -1,4 +1,11 @@
-﻿<!doctype html>
+﻿@{
+    User user = null;
+    if (ViewData["User"] != null)
+    {
+        user = (User)ViewData["User"];
+    }
+}
+<!doctype html>
 <html lang="zh-cn">
 <head>
     <!-- Required meta tags -->
@@ -42,8 +49,15 @@
             <link rel="stylesheet" href="~/css/bacgroudcolor.css" media="screen" id="style-color" />
         }
     }
-
-    <title>一站式编程学习平台</title>
+    @if (ViewData["Controller"] != null && ViewData["Controller"].ToString().Equals("Me"))
+    {
+        @if (ViewData["Action"] != null && ViewData["Action"].ToString().Equals("Info"))
+        {
+            <link rel="stylesheet" href="~/css/userinfo.css" />
+            <link rel="stylesheet" href="~/lib/cropperjs/dist/cropper.css" />
+        }
+    }
+    <title>@ViewData["Title"]</title>
 </head>
 <body>
     <!-- ----------------------------头部begin----------------------------------------- -->
@@ -75,17 +89,23 @@
                                     <a class="dropdown-item" href="/Article/Article/new">最新文章</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="/Article/Article/hot">热门文章</a>
-                                    @if (ViewData["Nick"].ToString().Length > 0)
+                                    @if (user != null)
                                     {
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="/Article/Editor">写文章</a>
                                     }
                                 </div>
                             </li>
-                            @if (ViewData["Nick"].ToString().Length > 0)
+                            @if (user != null)
                             {
                                 <li class="nav-item">
+                                    <a class="nav-link" href="/Article/Editor" target="_blank">写文章</a>
+                                </li>
+                                <li class="nav-item">
                                     <a class="nav-link" href="/Code/Code" target="_blank">代码空间</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/Match/Index" target="_blank">知识竞赛</a>
                                 </li>
                             }
                             <li class="nav-item">
@@ -95,7 +115,7 @@
                     </div>
                     <div class="row">
                         <div class=" d-lg-block">
-                            @if (string.IsNullOrEmpty(ViewData["Nick"].ToString()))
+                            @if (user == null)
                             {
                                 <a class="btn btn-sm" href="/Login/Login">登录</a>
                                 <span class="text-muted">|</span>
@@ -110,25 +130,25 @@
                                                 <a href="#" class="dropdown-toggle"
                                                    data-toggle="dropdown"
                                                    style="height: 60px">
-                                                    <img alt="" class="img-circle mr-3" src="/image/tx.jpg" width="38px" height="38px" />
+                                                    <img alt="" class="img-circle mr-3" src="@(string.IsNullOrEmpty(user.UserImgURL)?"~/data/image/user.png":user.UserImgURL)" width="38px" height="38px" />
                                                     <span style="color: #FFFFFF;font-size: 15px">
-                                                        <i>@ViewData["Nick"]</i>
+                                                        <i>@user.Nick</i>
                                                     </span>
                                                 </a>
                                                 <div class="dropdown-menu pull-right"
                                                      style="background: #FFFFFF;width: 320px;overflow: hidden">
                                                     <div style="margin-top: 16px;border-bottom: 1px solid #eeeeee">
                                                         <div style="text-align: center">
-                                                            <img class="img-circle" src="/image/tx.jpg"
+                                                            <img class="img-circle" src="@(string.IsNullOrEmpty(user.UserImgURL)?"~/data/image/user.png":user.UserImgURL)"
                                                                  style="width: 38px;height: 38px;" />
                                                         </div>
                                                         <div style="color: #323534;text-align: center;line-height: 36px;font-size: 15px">
-                                                            <span>@ViewData["Nick"]</span>
+                                                            <span>@user.Nick</span>
                                                         </div>
                                                     </div>
 
                                                     <div class="row" style="margin-left: 15px;margin-right: 15px;margin-top: 10px">
-                                                        <div class="col-4  text-center grid0">
+                                                        <div class="col-4  text-center grid0" onclick="window.location='/Me/Info'">
                                                             <i class="fa fa-user" style="font-size: 25px;line-height: 45px;"></i>
                                                             <p style="padding: 0px;margin-top: 6px;margin-bottom: 10px;font-size: 12px">
                                                                 个人中心
@@ -140,7 +160,7 @@
                                                                 账号管理
                                                             </p>
                                                         </div>
-                                                        <div class="col-4 text-center grid0">
+                                                        <div class="col-4 text-center grid0" onclick="window.location='/Me/Info'">
                                                             <i class="fa fa-key" style="font-size: 25px;line-height: 45px;"></i>
                                                             <p style="padding: 0px;margin-top: 6px;margin-bottom: 10px;font-size: 12px">
                                                                 密码修改
@@ -149,7 +169,7 @@
                                                     </div>
 
                                                     <div class="row" style="margin-left: 15px;margin-right: 15px;margin-top: 10px">
-                                                        <div class="col-4 text-center grid0">
+                                                        <div class="col-4 text-center grid0" onclick="window.location='/Me/Info'">
                                                             <i class="fa fa-user-circle" style="font-size: 25px;line-height: 45px;"></i>
                                                             <p style="padding: 0px;margin-top: 6px;margin-bottom: 10px;font-size: 12px">
                                                                 修改头像
@@ -251,7 +271,7 @@
         @if (ViewData["Action"] != null && ViewData["Action"].ToString().Equals("Editor"))
         {
             <script type="text/javascript" src="/js/editor.js"></script>
-            <script src="/lib/editormd/editormd.min.js"></script>
+            <script type="text/javascript" src="/lib/editormd/editormd.min.js"></script>
             <script type="text/javascript">
                 $(function () {
                     var editor = editormd("test-editor", {
@@ -272,8 +292,7 @@
             <script type="text/javascript" src="/lib/editormd/lib/sequence-diagram.min.js"></script>
             <script type="text/javascript" src="/lib/editormd/lib/flowchart.min.js"></script>
             <script type="text/javascript" src="/lib/editormd//lib/jquery.flowchart.min.js"></script>
-
-            <script src="/lib/editormd/editormd.min.js"></script>
+            <script type="text/javascript" src="/lib/editormd/editormd.min.js"></script>
             <script type="text/javascript">
                 $(function () {
                     var editor = editormd.markdownToHTML("test-editor", {
@@ -299,6 +318,14 @@
             <script type="text/javascript" src="~/js/custom.js"></script>
             <script type="text/javascript" src="~/js/isotope.min.js"></script>
             <script type="text/javascript" src="~/js/jquery.tooltips.min.js"></script>
+        }
+    }
+    @if (ViewData["Controller"] != null && ViewData["Controller"].ToString().Equals("Me"))
+    {
+        @if (ViewData["Action"] != null && ViewData["Action"].ToString().Equals("Info"))
+        {
+            <script type="text/javascript" src="~/lib/cropperjs/dist/cropper.js"></script>
+            <script type="text/javascript" src="~/js/userinfo.js"></script>
         }
     }
     <script>

@@ -70,7 +70,7 @@
                             <h6>发表评论</h6>
                             <!-- 评论区 begin -->
                             <div class="dedemao-comment">
-                                @if (ViewData["Nick"].ToString().Length > 0)
+                                @if (user != null)
                                 {
                                     <div class="dedemao-comment-box">
                                         <div class="b-box-textarea">
@@ -125,7 +125,7 @@
                                             {
                                                 <li class="entry zoomIn">
                                                     <div class="adiv">
-                                                        <div><img class="headerimage" src="~/image/img.jpg"></div>
+                                                        <div><img class="headerimage" src="@(string.IsNullOrEmpty(users[i].UserImgURL)?"/data/image/user.png":user.UserImgURL)"></div>
                                                     </div>
                                                     <div>
                                                         <div class="info rmp">
@@ -140,7 +140,7 @@
                                                         <div class="comm">
                                                             <p>@comments[i].Content</p>
                                                         </div>
-                                                        @if (ViewData["Nick"].ToString().Length > 0)
+                                                        @if (user != null)
                                                         {
                                                             <div class="zhiChi">
                                                                 <span class="comm_reply">
