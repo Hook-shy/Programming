@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Programming.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -39,5 +40,14 @@ namespace Programming.Utils
     {
         public string Comment { get; set; }
         public long ArticleId { get; set; }
+    }
+
+    public class UpdateInfoParameter
+    {
+        public string Nick { get; set; }
+        public string Name { get; set; }
+        public Sex sex { get; set; }
+        public DateTime Birthday { get; set; }
+        public string Synopsis { get; set; }
     }
 }

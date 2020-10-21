@@ -33,48 +33,52 @@
                 </div>
                 <!--个人信息 -->
                 <div class="info-main">
-                    <form class="am-form am-form-horizontal" action="" method="post">
+                    <form class="am-form am-form-horizontal" action="/Me/UpdateInfo" method="post">
                         <div class="am-form-group">
                             <label for="user-name2" class="am-form-label">昵称</label>
                             <div class="am-form-content">
-                                <input class="form-control" type="text" placeholder="昵称" value="@user.Nick">
+                                <input class="form-control" type="text" placeholder="昵称" name="nick" value="@user.Nick">
                             </div>
                         </div>
                         <div class="am-form-group">
                             <label for="user-name" class="am-form-label">姓名</label>
                             <div class="am-form-content">
-                                <input class="form-control" type="text" placeholder="姓名" value="@user.Name">
+                                <input class="form-control" type="text" placeholder="姓名" name="name" value="@user.Name">
                             </div>
                         </div>
                         <div class="am-form-group">
                             <label class="am-form-label">性别</label>
                             <div class="am-form-content sex">
                                 <label class="am-radio-inline">
-                                    <input type="radio" name="radio10" value="male" data-am-ucheck> 男
+                                    <input type="radio" name="sex" value="nam" @(user.Sex == Sex.Man ? "checked" : "") data-am-ucheck> 男
                                 </label>
                                 <label class="am-radio-inline">
-                                    <input type="radio" name="radio10" value="female" data-am-ucheck> 女
+                                    <input type="radio" name="sex" value="woman" @(user.Sex == Sex.Woman ? "checked" : "") data-am-ucheck> 女
                                 </label>
                                 <label class="am-radio-inline">
-                                    <input type="radio" name="radio10" value="secret" data-am-ucheck> 保密
+                                    <input type="radio" name="sex" value="secret" @(user.Sex == Sex.Secret ? "checked" : "") data-am-ucheck> 保密
                                 </label>
                             </div>
                         </div>
                         <div class="am-form-group">
-                            <label for="user-name" class="am-form-label">年龄</label>
+                            <label for="user-name" class="am-form-label">生日</label>
                             <div class="am-form-content">
-                                <input class="form-control" type="text" placeholder="年龄" value="@user.Birthday">
+                                <input class="form-control" type="date" placeholder="生日" name="birthday" value="@user.Birthday.ToString("yyyy-MM-dd")">
                             </div>
                         </div>
                         <div class="am-form-group">
                             <label for="user-phone" class="am-form-label">个人简介</label>
                             <div class="am-form-content">
-                                <input class="form-control" type="text" placeholder="介绍" value="@user.Synopsis">
+                                <input class="form-control" type="text" placeholder="介绍" name="synopsis" value="@user.Synopsis">
                             </div>
                         </div>
-                        <div class="text-danger">error!!!!!!!</div>
+                        @if (ViewData["Msg"] != null)
+                        {
+                            <div class="text-danger">@ViewData["Msg"]</div>
+                        }
+
                         <div class="info-btn">
-                            <div class="btn btn-primary">更新信息</div>
+                            <button type="submit" class="btn btn-primary">更新信息</button>
                             <div class="btn btn-danger">注销帐号</div>
                         </div>
                     </form>

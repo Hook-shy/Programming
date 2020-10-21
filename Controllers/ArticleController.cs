@@ -127,7 +127,7 @@ namespace Programming.Controllers
                 if (user != null)
                 {
                     ViewData["Nick"] = user.Nick;
-                    ViewData["Title"] = parameter.Title;
+                    ViewData["ATitle"] = parameter.Title;
                     ViewData["KeyWord"] = parameter.KeyWord;
                     ViewData["IsOriginal"] = parameter.IsOriginal == null ? false : parameter.IsOriginal.Equals("on");
                     ViewData["Content"] = parameter.Content;

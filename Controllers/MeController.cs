@@ -49,9 +49,42 @@ namespace Programming.Controllers
             return RedirectToAction("Login", "Login");
         }
 
-        public IActionResult UpdateInfo()
+        [HttpPost]
+        public IActionResult UpdateInfo([FromForm] UpdateInfoParameter parameter)
         {
-            return View();
+            string sessionCode = "";
+            Request.Cookies.TryGetValue("SessionCode", out sessionCode);
+            ViewData["Nick"] = "";
+            if (!string.IsNullOrEmpty(sessionCode))
+            {
+                User user = UserServer.CheckSessionCode(sessionCode, _usercontext);
+                if (user != null)
+                {
+                    user.Nick = parameter.Nick == null ? "" : parameter.Nick;
+                    user.Name = parameter.Name == null ? "" : parameter.Name;
+                    user.Birthday = parameter.Birthday;
+                    user.Sex = parameter.sex;
+                    user.Synopsis = parameter.Synopsis == null ? "" : parameter.Synopsis;
+                    ViewData["User"] = user;
+                    ViewData["Title"] = "一站式编程学习平台|我";
+                    ViewData["Controller"] = "Me";
+                    ViewData["Action"] = "Info";
+                    if (string.IsNullOrEmpty(parameter.Nick))
+                    {
+                        ViewData["Msg"] = "昵称不能为空";
+                        return View("Info");
+                    }
+                    if (_usercontext.Users.Where(u => u.Nick != null && u.Nick.Equals(parameter.Nick)).Count() != 1)
+                    {
+                        ViewData["Msg"] = "该昵称已经被使用了";
+                        return View("Info");
+                    }
+                    _usercontext.Users.Update(user);
+                    _usercontext.SaveChanges();
+                    return View("Info");
+                }
+            }
+            return RedirectToAction("Login", "Login");
         }
 
         [HttpPost]
