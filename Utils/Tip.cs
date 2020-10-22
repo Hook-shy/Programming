@@ -11,11 +11,12 @@ namespace Programming.Utils
         {
         }
 
-        public Tip(string title, string smallTitle, string content, int wait)
+        public Tip(string title, string smallTitle, string content, string textclass, int wait)
         {
             Title = title;
             SmallTitle = smallTitle;
             Content = content;
+            TextClass = textclass;
             Wait = wait;
         }
 
@@ -23,5 +24,6 @@ namespace Programming.Utils
         public string SmallTitle { get; set; }
         public string Content { get; set; }
         public int Wait { get; set; }
+        public string TextClass { get; set; }
     }
 }

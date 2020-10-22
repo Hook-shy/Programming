@@ -276,7 +276,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="toast-body">
+                <div class="toast-body @tip.TextClass">
                     @tip.Content
                 </div>
             </div>
@@ -348,6 +348,9 @@
             <script type="text/javascript" src="~/js/custom.js"></script>
             <script type="text/javascript" src="~/js/isotope.min.js"></script>
             <script type="text/javascript" src="~/js/jquery.tooltips.min.js"></script>
+            <script type="text/javascript">
+                setTimeout(() => { document.getElementById("@(ViewData["Tab"] == null ? "all": ViewData["Tab"])").click(); }, 500)
+            </script>
         }
     }
     @if (ViewData["Controller"] != null && ViewData["Controller"].ToString().Equals("Me"))
