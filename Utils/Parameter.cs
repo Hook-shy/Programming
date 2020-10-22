@@ -50,4 +50,12 @@ namespace Programming.Utils
         public DateTime Birthday { get; set; }
         public string Synopsis { get; set; }
     }
+
+    public class UploadFileParameter
+    {
+        public string Title { get; set; }
+        public string Describe { get; set; }
+        public string Tag { get; set; }
+        public DownloadItemType Type { get; set; }
+    }
 }

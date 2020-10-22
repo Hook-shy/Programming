@@ -4,6 +4,11 @@
     {
         user = (User)ViewData["User"];
     }
+    Programming.Utils.Tip tip = null;
+    if (ViewData["Tip"] != null)
+    {
+        tip = (Programming.Utils.Tip)ViewData["Tip"];
+    }
 }
 <!doctype html>
 <html lang="zh-cn">
@@ -99,17 +104,17 @@
                             @if (user != null)
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/Article/Editor" target="_blank">写文章</a>
+                                    <a class="nav-link" href="/Article/Editor">写文章</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/Code/Code" target="_blank">代码空间</a>
+                                    <a class="nav-link" href="/Code/Code">代码空间</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/Match/Index" target="_blank">知识竞赛</a>
+                                    <a class="nav-link" href="/Match/Index">知识竞赛</a>
                                 </li>
                             }
                             <li class="nav-item">
-                                <a class="nav-link" href="/Download/Download" target="_blank">下载专区</a>
+                                <a class="nav-link" href="/Download/Download">下载专区</a>
                             </li>
                         </ul>
                     </div>
@@ -255,10 +260,35 @@
     <!-- 共用页眉页脚 -->
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-
+    <!-- Flexbox container for aligning the toasts -->
     <script src="/js/jquery-3.4.1.js"></script>
     <script src="/js/bootstrap.js"></script>
     <script src="/js/modernizr.custom.js"></script>
+    @if (tip != null)
+    {
+        <div id="tips-box" style="position: fixed;margin: auto;left: 0;right: 0;top: 0;width: 400px;height: 200px;z-index:20000;">
+            <div role="alert" aria-live="assertive" aria-atomic="true" class="toast"
+                 style="min-height: 80px;min-width: 200px;" data-autohide="false" id="tipswindow">
+                <div class="toast-header">
+                    <strong class="mr-auto">@tip.Title</strong>
+                    <small>@tip.SmallTitle</small>
+                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="toast-body">
+                    @tip.Content
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            $('#tipswindow').toast('show');
+            setTimeout(() => { document.getElementById('tips-box').style.display = 'none'; document.getElementById('tipswindow').style.display = 'none'; }, @tip.Wait);
+        </script>
+    }
+
+
     @if (ViewData["Controller"] != null && ViewData["Controller"].ToString().Equals("Article"))
     {
         <script src="/lib/layui/layui.js"></script>
@@ -352,6 +382,7 @@
         });
 
     </script> -->
+
 
 
 </body>

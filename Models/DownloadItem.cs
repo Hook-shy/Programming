@@ -27,5 +27,6 @@ namespace Programming.Models
         public long Size { get; set; }
         public int DownloadCount { get; set; }
         public string ImgUrl { get; set; }
+        public string Url { get; set; }
     }
 }

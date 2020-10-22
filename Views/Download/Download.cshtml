@@ -36,7 +36,7 @@
                     <li><a data-categories="my_upload">我的上传</a></li>
                     <li><a data-categories="upload_file">上传</a></li>
                 </ul>
-                <form>
+                <form action="/Download/UploadFile" method="post">
                     <ul id="portfolio-container" class="four-columns">
 
                         <li class="isotope-item" data-categories="one">
@@ -148,7 +148,7 @@
                                         <p class="pointer-none">
                                             <b>拖放到这里</b> files here <br /> or <a href="" id="triggerFile">浏览</a>开始上传
                                         </p>
-                                        <input type="file" multiple="multiple" />
+                                        <input type="file" multiple="multiple" name="file" />
                                     </div>
                                     <footer>
                                         <div class="divider">
@@ -165,31 +165,30 @@
                             </div>
                         </li>
                         <li class="isotope-item" data-categories="upload_file">
-
-
                             <div class="form-group">
                                 <label for="exampleFormControlInput1">资源名称</label>
-                                <input type="text" class="form-control" id="exampleFormControlInput1"
-                                       placeholder="如：计算机科学与技术">
+                                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="如：毕业设计" name="title"/>
                             </div>
                             <div class="form-group">
                                 <label for="exampleFormControlSelect1">资源类型</label>
-                                <select class="form-control" id="exampleFormControlSelect1">
-                                    <option>工具</option>
-                                    <option>文档</option>
-                                    <option>代码</option>
-                                    <option>影音</option>
-                                    <option>其他</option>
+                                <select class="form-control" id="exampleFormControlSelect1" name="type">
+                                    <option value="tool">工具</option>
+                                    <option value="doc">文档</option>
+                                    <option value="code">代码</option>
+                                    <option value="media">影音</option>
+                                    <option value="other">其他</option>
                                 </select>
                             </div>
                             <div class="form-group">
+                                <label for="exampleFormControlTextarea1">标签</label>
+                                <input type="text" class="form-control" id="exampleFormControlInput2" placeholder="前端/CSS" name="tag"/>
+                            </div>
+                            <div class="form-group">
                                 <label for="exampleFormControlTextarea1">资源描述</label>
-                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="2"></textarea>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" name="describe"></textarea>
                             </div>
                             <button class="btn btn-info" type="submit">提交</button>
-
                         </li>
-
                     </ul>
                 </form>
             </div>
