@@ -60,14 +60,6 @@ namespace Programming.Controllers
         [HttpPost]
         public async Task<IActionResult> UploadFileAsync([FromForm] UploadFileParameter parameter)
         {
-            foreach(var x in Request.Form)
-            {
-                Debug.WriteLine(x);
-            }
-            Debug.WriteLine(parameter.Title);
-            Debug.WriteLine(parameter.Tag);
-            Debug.WriteLine(parameter.Describe);
-            Debug.WriteLine(parameter.Type);
             string sessionCode = "";
             Request.Cookies.TryGetValue("SessionCode", out sessionCode);
             ViewData["User"] = null;

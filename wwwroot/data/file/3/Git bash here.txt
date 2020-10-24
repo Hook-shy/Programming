@@ -1,0 +1,44 @@
+git git init
+git add *
+git commit -m "first commit"
+git remote add origin https://github.com/Xingyb14/Test.git
+git push -u origin master
+
+出现错误的主要原因是github中的README.md文件不在本地代码目录中
+可以通过如下命令进行代码合并【注：pull=fetch+merge]
+git pull --rebase origin master
+执行上面代码后可以看到本地代码库中多了README.md文件
+此时再执行语句 git push -u origin master即可完成代码上传到github
+
+fork到本地
+git clone http://jkhksdj
+
+cd xx进入
+cd ..返回上一级
+clear 清除
+ls 当前目录
+touch meeting.md 创建这个文件
+rm xx.md 清除xx.md
+mkdir text 创建文件夹text
+（Linux递归删除所有东西命令：rm -rf /）
+rm-r text 删除text文件夹
+mv index.html text将index.html移动到text文件夹中
+reset重新加载终端
+history查看历史命令
+help
+exit
+#表示注释
+git config -l查看配置命令
+git config --system --list查看系统配置命令
+git config --global --list查看本地配置命令
+
+git add .添加所有命令到暂存区
+git status
+跟踪文件
+
+git commit -m"hello world."提交暂存区中的内容到本地仓库（m为提交的消息）
+
+gitlab搭建企业自己的服务器在Linux上部署
+
+
+生成公钥：在.ssh文件下敲ssh-keygen -t rsa

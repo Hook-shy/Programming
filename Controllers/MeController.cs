@@ -74,7 +74,7 @@ namespace Programming.Controllers
                         ViewData["Msg"] = "昵称不能为空";
                         return View("Info");
                     }
-                    if (_usercontext.Users.Where(u => u.Nick != null && u.Nick.Equals(parameter.Nick)).Count() != 1)
+                    if (_usercontext.Users.Where(u => u.Nick != null && u.Nick.Equals(parameter.Nick)).Count() >= 1)
                     {
                         ViewData["Msg"] = "该昵称已经被使用了";
                         return View("Info");
@@ -119,6 +119,16 @@ namespace Programming.Controllers
                 }
             }
             return RedirectToAction("Info");
+        }
+
+        public IActionResult DownloadFile()
+        {
+            return View();
+        }
+
+        public IActionResult DeleteFile()
+        {
+            return View();
         }
     }
 }
