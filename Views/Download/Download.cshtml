@@ -3,6 +3,9 @@
 *@
 @{
     Layout = "~/Views/Shared/_Main.cshtml";
+    User user = (User)ViewData["User"];
+    List<DownloadItem> items = (List<DownloadItem>)ViewData["Items"];
+    List<User> users = (List<User>)ViewData["Users"];
 }
 <div id="container">
     <!-- main container starts-->
@@ -36,102 +39,31 @@
                     <li><a id="my-upload" data-categories="my_upload">我的上传</a></li>
                     <li><a id="upload-file" data-categories="upload_file">上传</a></li>
                 </ul>
-                <form action="/Download/UploadFile" method="post">
+                <form action="/Download/UploadFile" method="post" enctype="multipart/form-data">
                     <ul id="portfolio-container" class="four-columns">
-
-                        <li class="isotope-item" data-categories="all">
-                            <div class="item-wrapp">
-                                <div class="portfolio-item">
-                                    <a href="#" class="item-permacenter"><i class="fa fa-download"></i></a>
-                                    <img src="~/image/resources_tool.png" alt="" />
+                        @for (int i = 0; i < items.Count; i++)
+                        {
+                            <li class="isotope-item" data-categories="all @(items[i].UserId == user.Id? "my_upload":"")">
+                                <div class="item-wrapp">
+                                    <div class="portfolio-item">
+                                        <a href="#" class="item-permacenter"><i class="fa fa-download"></i></a>
+                                        @if (items[i].UserId == user.Id)
+                                        {
+                                            <a href="#" class="item-preview"><i class="fa fa-trash"></i></a>
+                                        }
+                                        <img src="@items[i].ImgUrl" alt="" />
+                                    </div>
+                                    <div class="portfolio-item-title">
+                                        <a href="#">@items[i].Title</a>
+                                        <p>@items[i].Tag</p>
+                                        <img src="@(string.IsNullOrEmpty(users[i].UserImgURL)?"~/data/image/user.png":users[i].UserImgURL)" alt="" style="width: 20px;height:20px">
+                                        <span>@users[i].Nick</span>
+                                        <span>@Programming.Server.Transform.SizeToString(items[i].Size)</span>
+                                        <span><i class="fa fa-download"></i>@items[i].DownloadCount</span>
+                                    </div>
                                 </div>
-                                <div class="portfolio-item-title">
-                                    <a href="#">python爬取中国天气网</a>
-                                    <p> 爬虫 / Python / pdf</p>
-                                    <img src="~/image/bacgroud1.jpg" alt="" style="width: 20px;height:20px">
-                                    <span>tushan</span>
-                                    <span>21.3KB</span>
-                                    <span><i class="fa fa-download"></i>555</span>
-
-                                </div>
-                            </div>
-                        </li>
-                        <li class="isotope-item" data-categories="all">
-                            <div class="item-wrapp">
-                                <div class="portfolio-item">
-                                    <a href="#" class="item-permacenter"><i class="fa fa-download"></i></a>
-                                    <img src="~/image/resources_code.png" alt="" />
-                                </div>
-                                <div class="portfolio-item-title">
-                                    <a href="#">web响应式设计设计</a>
-                                    <p>
-                                        前端 / JavaScript
-                                    </p>
-                                    <img src="~/image/bacgroud1.jpg" alt="" style="width: 20px;height:20px">
-                                    <span>tushan</span>
-                                    <span>21.3KB</span>
-                                    <span><i class="fa fa-download"></i>555</span>
-                                </div>
-                            </div>
-                        </li>
-
-                        <li class="isotope-item" data-categories="all">
-                            <div class="item-wrapp">
-                                <div class="portfolio-item">
-                                    <a href="#" class="item-permacenter"><i class="fa fa-download"></i></a>
-                                    <img src="~/image/resources_doc.png" alt="" />
-                                </div>
-                                <div class="portfolio-item-title">
-                                    <a href="#">UI设计</a>
-                                    <p>
-                                        UI / 设计
-                                    </p>
-                                    <img src="~/image/bacgroud1.jpg" alt="" style="width: 20px;height:20px">
-                                    <span>tushan</span>
-                                    <span>21.3KB</span>
-                                    <span><i class="fa fa-download"></i>555</span>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="isotope-item" data-categories="all my_upload">
-                            <div class="item-wrapp">
-                                <div class="portfolio-item">
-                                    <a href="#" class="item-permalink"><i class="fa fa-download"></i></a>
-                                    <a href="#" class="item-preview"><i class="fa fa-trash"></i></a>
-                                    <img src="~/image/resources_media.png" alt="" />
-                                </div>
-                                <div class="portfolio-item-title">
-                                    <a href="#">产品经理</a>
-                                    <p>
-                                        产品 / 设计
-                                    </p>
-                                    <img src="~/image/bacgroud1.jpg" alt="" style="width: 20px;height:20px">
-                                    <span>tushan</span>
-                                    <span>21.3KB</span>
-                                    <span><i class="fa fa-download"></i>555</span>
-                                </div>
-                            </div>
-                        </li>
-
-                        <li class="isotope-item" data-categories="all">
-                            <div class="item-wrapp">
-                                <div class="portfolio-item my_upload">
-                                    <a href="#" class="item-permalink"><i class="fa fa-download"></i></a>
-                                    <a href="#" class="item-preview"><i class="fa fa-trash"></i></a>
-                                    <img src="~/image/resources_other.png" alt="" />
-                                </div>
-                                <div class="portfolio-item-title">
-                                    <a href="#">技术栈</a>
-                                    <p>
-                                        技术栈 / 后端
-                                    </p>
-                                    <img src="~/image/bacgroud1.jpg" alt="" style="width: 20px;height:20px">
-                                    <span>tushan</span>
-                                    <span>21.3KB</span>
-                                    <span><i class="fa fa-download"></i>555</span>
-                                </div>
-                            </div>
-                        </li>
+                            </li>
+                        }
 
                         <li class="isotope-item" data-categories="upload_file ">
                             <div class="upload">
@@ -148,7 +80,7 @@
                                         <p class="pointer-none">
                                             <b>拖放到这里</b> files here <br /> or <a href="" id="triggerFile">浏览</a>开始上传
                                         </p>
-                                        <input type="file" multiple="multiple" name="file" />
+                                        <input type="file" name="file" />
                                     </div>
                                     <footer>
                                         <div class="divider">
@@ -167,11 +99,11 @@
                         <li class="isotope-item" data-categories="upload_file">
                             <div class="form-group">
                                 <label for="exampleFormControlInput1">资源名称</label>
-                                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="如：毕业设计" name="title"/>
+                                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="圆角效果" name="title" value="@(ViewData["Parameter"] != null ? ((Programming.Utils.UploadFileParameter)ViewData["Parameter"]).Title:"")" />
                             </div>
                             <div class="form-group">
                                 <label for="exampleFormControlSelect1">资源类型</label>
-                                <select class="form-control" id="exampleFormControlSelect1" name="type">
+                                <select class="form-control" id="exampleFormControlSelect1" name="type" value="@(ViewData["Parameter"] != null ? ((Programming.Utils.UploadFileParameter)ViewData["Parameter"]).Type.ToString().ToLower():"")">
                                     <option value="tool">工具</option>
                                     <option value="doc">文档</option>
                                     <option value="code">代码</option>
@@ -181,11 +113,11 @@
                             </div>
                             <div class="form-group">
                                 <label for="exampleFormControlTextarea1">标签</label>
-                                <input type="text" class="form-control" id="exampleFormControlInput2" placeholder="前端/CSS" name="tag"/>
+                                <input type="text" class="form-control" id="exampleFormControlInput2" placeholder="爬虫 / Python / pdf" name="tag" value="@(ViewData["Parameter"] != null ? ((Programming.Utils.UploadFileParameter)ViewData["Parameter"]).Tag:"")" />
                             </div>
                             <div class="form-group">
                                 <label for="exampleFormControlTextarea1">资源描述</label>
-                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" name="describe"></textarea>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" name="describe">@(ViewData["Parameter"] != null ? ((Programming.Utils.UploadFileParameter)ViewData["Parameter"]).Describe:"")</textarea>
                             </div>
                             <button class="btn btn-info" type="submit">提交</button>
                         </li>

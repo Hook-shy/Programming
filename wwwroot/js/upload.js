@@ -1,5 +1,5 @@
 //DOM
-const $ = document.querySelector.bind(document);
+const doc = document.querySelector.bind(document);
 
 //APP
 let App = {};
@@ -11,7 +11,7 @@ App.init = (function () {
         //files template
         let template = `${Object.keys(files)
             .map(
-                file => `<div class="file file--${file}">
+                file => `<div class="file file--doc{file}">
      <div class="name"><span>${files[file].name}</span></div>
      <div class="progress active"></div>
      <div class="done">
@@ -25,54 +25,54 @@ App.init = (function () {
             )
             .join("")}`;
 
-        $("#drop").classList.add("hidden");
-        $("footer").classList.add("hasFiles");
-        $(".importar").classList.add("active");
+        doc("#drop").classList.add("hidden");
+        doc("footer").classList.add("hasFiles");
+        doc(".importar").classList.add("active");
         setTimeout(() => {
-            $(".list-files").innerHTML = template;
+            doc(".list-files").innerHTML = template;
         }, 1000);
 
         Object.keys(files).forEach(file => {
             let load = 2000 + file * 2000; // fake load
             setTimeout(() => {
-                $(`.file--${file}`).querySelector(".progress").classList.remove("active");
-                $(`.file--${file}`).querySelector(".done").classList.add("anim");
+                doc(`.file--${file}`).querySelector(".progress").classList.remove("active");
+                doc(`.file--${file}`).querySelector(".done").classList.add("anim");
             }, load);
         });
     }
 
     // trigger input
-    $("#triggerFile").addEventListener("click", evt => {
+    doc("#triggerFile").addEventListener("click", evt => {
         evt.preventDefault();
-        $("input[type=file]").click();
+        doc("input[type=file]").click();
     });
 
     // drop events
-    $("#drop").ondragleave = evt => {
-        $("#drop").classList.remove("active");
+    doc("#drop").ondragleave = evt => {
+        doc("#drop").classList.remove("active");
         evt.preventDefault();
     };
-    $("#drop").ondragover = $("#drop").ondragenter = evt => {
-        $("#drop").classList.add("active");
+    doc("#drop").ondragover = doc("#drop").ondragenter = evt => {
+        doc("#drop").classList.add("active");
         evt.preventDefault();
     };
-    $("#drop").ondrop = evt => {
-        $("input[type=file]").files = evt.dataTransfer.files;
-        $("footer").classList.add("hasFiles");
-        $("#drop").classList.remove("active");
+    doc("#drop").ondrop = evt => {
+        doc("input[type=file]").files = evt.dataTransfer.files;
+        doc("footer").classList.add("hasFiles");
+        doc("#drop").classList.remove("active");
         evt.preventDefault();
     };
 
     //upload more
-    $(".importar").addEventListener("click", () => {
-        $(".list-files").innerHTML = "";
-        $("footer").classList.remove("hasFiles");
-        $(".importar").classList.remove("active");
+    doc(".importar").addEventListener("click", () => {
+        doc(".list-files").innerHTML = "";
+        doc("footer").classList.remove("hasFiles");
+        doc(".importar").classList.remove("active");
         setTimeout(() => {
-            $("#drop").classList.remove("hidden");
+            doc("#drop").classList.remove("hidden");
         }, 500);
     });
 
     // input change
-    $("input[type=file]").addEventListener("change", handleFileSelect);
+    doc("input[type=file]").addEventListener("change", handleFileSelect);
 })();

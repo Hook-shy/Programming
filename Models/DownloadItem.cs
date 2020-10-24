@@ -17,7 +17,7 @@ namespace Programming.Models
 
     public class DownloadItem : Model
     {
-        public string UserId { get; set; }
+        public long UserId { get; set; }
         public bool IsPass { get; set; }
         public DateTime PassDate { get; set; }
         public DownloadItemType Type { get; set; }

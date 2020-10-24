@@ -56,8 +56,8 @@ namespace Programming.Migrations.DownloadItem
                     b.Property<string>("Url")
                         .HasColumnType("text");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("text");
+                    b.Property<long>("UserId")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 

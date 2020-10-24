@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Security.Policy;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Programming.Models;
 using Programming.Server;
@@ -12,11 +16,15 @@ namespace Programming.Controllers
 {
     public class DownloadController : Controller
     {
+        private IHostingEnvironment hostingEnvironment;
         private readonly UserContext _usercontext;
+        private readonly DownloadItemContext _downloaditemcontext;
 
-        public DownloadController(UserContext userContext)
+        public DownloadController(UserContext userContext, DownloadItemContext downloadItemContext, IHostingEnvironment environment)
         {
             _usercontext = userContext;
+            _downloaditemcontext = downloadItemContext;
+            hostingEnvironment = environment;
         }
 
         [Route("[controller]/[action]/{page=all}")]
@@ -35,6 +43,14 @@ namespace Programming.Controllers
                     ViewData["Controller"] = "Download";
                     ViewData["Action"] = "Download";
                     ViewData["Tab"] = page;
+                    List<DownloadItem> items = _downloaditemcontext.DownloadItems.AsEnumerable().ToList();
+                    ViewData["Items"] = items;
+                    List<User> users = new List<User>();
+                    foreach(var d in items)
+                    {
+                        users.Add(_usercontext.Users.AsEnumerable().FirstOrDefault(u => u.Id == d.UserId));
+                    }
+                    ViewData["Users"] = users;
                     return View();
                 }
             }
@@ -42,8 +58,12 @@ namespace Programming.Controllers
         }
 
         [HttpPost]
-        public IActionResult UploadFile([FromForm]UploadFileParameter parameter)
+        public async Task<IActionResult> UploadFileAsync([FromForm] UploadFileParameter parameter)
         {
+            foreach(var x in Request.Form)
+            {
+                Debug.WriteLine(x);
+            }
             Debug.WriteLine(parameter.Title);
             Debug.WriteLine(parameter.Tag);
             Debug.WriteLine(parameter.Describe);
@@ -60,25 +80,83 @@ namespace Programming.Controllers
                     ViewData["Title"] = "一站式编程学习平台|下载";
                     ViewData["Controller"] = "Download";
                     ViewData["Action"] = "Download";
-                    if(parameter.Title == null || string.IsNullOrEmpty(parameter.Title.Trim()))
+                    List<DownloadItem> items = _downloaditemcontext.DownloadItems.AsEnumerable().ToList();
+                    ViewData["Items"] = items;
+                    List<User> users = new List<User>();
+                    foreach (var d in items)
                     {
-                        ViewData["Tip"] = new Tip("提示", "上传文件", "名称不能为空", "text-danger", 5000);
+                        users.Add(_usercontext.Users.AsEnumerable().FirstOrDefault(u => u.Id == d.UserId));
+                    }
+                    ViewData["Users"] = users;
+
+                    ViewData["Parameter"] = parameter;
+                    if (parameter.Title == null || string.IsNullOrEmpty(parameter.Title.Trim()))
+                    {
+                        ViewData["Tip"] = new Tip("提示", "上传文件", "标题不能为空", "text-danger", 5000);
                         ViewData["Tab"] = "upload-file";
                         return View("Download");
                     }
-                    if(parameter.Tag == null || string.IsNullOrEmpty(parameter.Tag.Trim()))
+                    if (parameter.Tag == null || string.IsNullOrEmpty(parameter.Tag.Trim()))
                     {
                         ViewData["Tip"] = new Tip("提示", "上传文件", "标签不能为空", "text-danger", 5000);
                         ViewData["Tab"] = "upload-file";
                         return View("Download");
                     }
-                    if(parameter.Describe == null || string.IsNullOrEmpty(parameter.Describe.Trim()))
+                    if (parameter.Describe == null || string.IsNullOrEmpty(parameter.Describe.Trim()))
                     {
                         ViewData["Tip"] = new Tip("提示", "上传文件", "描述不能为空", "text-danger", 5000);
                         ViewData["Tab"] = "upload-file";
                         return View("Download");
                     }
-                    ViewData["Tip"] = new Tip("提示", "上传文件", "上传成功", "text-success", 5000);
+                    var files = Request.Form.Files;
+                    Debug.WriteLine($"文件数量{files.Count}");
+                    if (files.Count != 1)
+                    {
+                        ViewData["Tip"] = new Tip("提示", "上传文件", "只能上传单个文件", "text-danger", 5000);
+                        ViewData["Tab"] = "upload-file";
+                        return View("Download");
+                    }
+                    var file = files[0];
+                    long size = file.Length;
+                    if (size > 50 * 1024 * 1024)
+                    {
+                        ViewData["Tip"] = new Tip("提示", "上传文件", "文件大小不能超过50MB", "text-danger", 5000);
+                        ViewData["Tab"] = "upload-file";
+                        return View("Download");
+                    }
+                    if (size > 0)
+                    {
+                        string dicPath = hostingEnvironment.WebRootPath + @$"\data\file\{user.Id}";
+                        string filePath = $@"{dicPath}\{file.FileName}";
+                        if (!Directory.Exists(dicPath))
+                        {
+                            Directory.CreateDirectory(dicPath);
+                        }
+                        using (var stream = System.IO.File.Create(filePath))
+                        {
+                            await file.CopyToAsync(stream);
+                        }
+                        DownloadItem downloadItem = new DownloadItem
+                        {
+                            Describe = parameter.Describe,
+                            Size = size,
+                            Tag = parameter.Tag,
+                            Title = parameter.Title,
+                            Url = @$"\data\file\{user.Id}\{file.FileName}",
+                            Type = parameter.Type,
+                            UserId = user.Id,
+                            ImgUrl = $"/image/resources_{parameter.Type.ToString().ToLower()}.png"
+                        };
+                        _downloaditemcontext.DownloadItems.Add(downloadItem);
+                        _downloaditemcontext.SaveChanges();
+                        ViewData["Tip"] = new Tip("提示", "上传文件", "上传成功", "text-success", 5000);
+                        ViewData["Parameter"] = null;
+                        items.Add(downloadItem);
+                        users.Add(user);
+                        return View("Download");
+                    }
+                    ViewData["Tip"] = new Tip("提示", "上传文件", "上传失败", "text-danger", 5000);
+                    ViewData["Tab"] = "upload-file";
                     return View("Download");
                 }
             }

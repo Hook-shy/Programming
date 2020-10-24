@@ -15,7 +15,7 @@ namespace Programming.Migrations.DownloadItem
                     Id = table.Column<long>(nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     CreateDate = table.Column<DateTime>(nullable: false),
-                    UserId = table.Column<string>(nullable: true),
+                    UserId = table.Column<long>(nullable: false),
                     IsPass = table.Column<bool>(nullable: false),
                     PassDate = table.Column<DateTime>(nullable: false),
                     Type = table.Column<int>(nullable: false),

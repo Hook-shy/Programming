@@ -9,7 +9,7 @@ using Programming.Models;
 namespace Programming.Migrations.DownloadItem
 {
     [DbContext(typeof(DownloadItemContext))]
-    [Migration("20201021141213_MyMigration")]
+    [Migration("20201024081232_MyMigration")]
     partial class MyMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -58,8 +58,8 @@ namespace Programming.Migrations.DownloadItem
                     b.Property<string>("Url")
                         .HasColumnType("text");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("text");
+                    b.Property<long>("UserId")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
