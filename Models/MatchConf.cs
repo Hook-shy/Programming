@@ -37,6 +37,6 @@ namespace Programming.Models
         public int TFQPoint { get; set; } = 2;
         public int CQPoint { get; set; } = 2;
         public int MatchTimes { get; set; } = 3;
-        public ScoreType scoreType { get; set; } = ScoreType.MAX;
+        public ScoreType ScoreType { get; set; } = ScoreType.MAX;
     }
 }

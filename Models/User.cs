@@ -12,7 +12,8 @@ namespace Programming.Models
     {
         General = 0,
         Admin = 1,
-        Super = 2
+        Super = 2,
+        Disable = 3
     }
 
     public enum Sex

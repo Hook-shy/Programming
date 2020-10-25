@@ -18,7 +18,7 @@ namespace Programming.Models
         public string Title { get; set;}
         public QuestionType type { get; set; }
         public string[] Options { get; set; }
-        public int[] Answer { get; set; }
+        public string Answer { get; set; }
         public string Explain { get; set; }
         public string Source { get; set; }
     }
