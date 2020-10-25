@@ -15,9 +15,23 @@ namespace Programming.Controllers
         {
             _usercontext = userContext;
         }
+
+        [Route("[controller]/[action]/{id=0}")]
         public IActionResult Index()
         {
             ViewData["Title"] = "一站式编程学习平台|知识竞赛";
+            return View();
+        }
+
+        [Route("[controller]/[action]/{id=0}")]
+        public IActionResult Match()
+        {
+            return View();
+        }
+
+        [Route("[controller]/[action]/{id=0}")]
+        public IActionResult Practice()
+        {
             return View();
         }
     }

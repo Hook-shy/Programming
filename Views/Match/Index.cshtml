@@ -17,16 +17,16 @@
 </head>
 
 <body>
+
     <!--------------------头部-begin------------------------------>
     <header id="lk_header">
         <nav class="navbar navbar-expand-lg navbar-light navbar-lk " id="navbar-example">
-            <div class="container">
+            <dbiv class="container">
                 <div class="d-none d-sm-none d-md-block d-lg-block">
                     <a class="navbar-brand d-flex justify-content-center align-items-center" href="#">
-                        <img src="~/image/lk_logo.png" alt="">
+                        <img src="https://s1.ax1x.com/2020/05/19/Y5mqEV.png" alt="">
                     </a>
                 </div>
-
                 <div class="collapse navbar-collapse" id="lk_nav">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
@@ -44,7 +44,9 @@
                     <div class="container">
                         <div class="row">
                             <!-- 未登录状态 -->
-                            <button type="button" class="btn btn-outline-primary" data-toggle="modal" id="signbutton" data-target="#exampleModal" data-whatever="@@mdo">报名参赛</button>
+                            <button type="button" class="btn btn-outline-success" data-toggle="modal" id="signbutton" data-target="#exampleModal" data-whatever="@@mdo">
+                                报名参赛
+                            </button>
                             <!-- 登录状态 -->
                             <a href="#" id="userimg" style="display: none;">
                                 <img src="~/image/hand.png" class="img-circle img2" alt="">
@@ -53,52 +55,58 @@
                             <div class="dropdown show mt-2" id="usernamediv" style="display: none;">
                                 <a class=" dropdown-toggle btn-sm" href="#" id="username" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">123</a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <a class="dropdown-item" href="#" id="number-info"></a>
+                                    <a class="dropdown-item" href="#" id="class-info"></a>
+                                    <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="#" onclick="logout()">退出</a>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">
-                                        请完善以下信息
-                                        <span class="text-danger">（不可修改）</span>
-                                    </h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <form id="form1" action="/pys/r_sign.py" method="POST" onsubmit="return check()">
-                                    <div class="modal-body">
-                                        <div class="form-group">
-                                            <label for="recipient-name" class="col-form-label">姓名：</label>
-                                            <input type="text" class="form-control" id="recipient-name" name="name">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="message-text" class="col-form-label">学号：</label>
-                                            <input type="text" class="form-control" id="message-text" name="num">
-                                        </div>
-                                        <label class="my-1 mr-2" for="inlineFormCustomSelectPref">班级：</label>
-                                        <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" name="cla">
-                                        </select>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-                                        <button type="submit" class="btn btn-primary">提交</button>
-                                    </div>
-                                </form>
+                </div>
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">
+                                    请完善以下信息
+                                    <span class="text-danger">（不可修改）</span>
+                                </h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
                             </div>
+                            <form id="form1" action="/pys/r_sign.py" method="POST" onsubmit="return check()">
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="recipient-name" class="col-form-label">姓名：</label>
+                                        <input type="text" class="form-control" id="recipient-name" name="name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="message-text" class="col-form-label">学号：</label>
+                                        <input type="text" class="form-control" id="message-text" name="num">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="message-cla" class="col-form-label">班级：</label>
+                                        <input type="text" class="form-control" id="message-cla" name="cla">
+                                    </div>
+                                    </select>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                                    <button type="submit" class="btn btn-success">提交</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#lk_nav" aria-controls="lk_nav" aria-expanded="false" aria-label="Toggle navigation">
+                </div>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#lk_nav"
+                        aria-controls="lk_nav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-            </div>
+                </div>
         </nav>
     </header>
     <!--------------------头部-end------------------------------>
@@ -106,14 +114,12 @@
     <section id="lk_carousel" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
             <li data-target="#lk_carousel" data-slide-to="0" class="active"></li>
-            <li data-target="#lk_carousel" data-slide-to="1"></li>
-            <li data-target="#lk_carousel" data-slide-to="2"></li>
+            <!-- <li data-target="#lk_carousel" data-slide-to="1"></li>
+            <li data-target="#lk_carousel" data-slide-to="2"></li> -->
         </ol>
         <div class="carousel-inner">
-            <div class="carousel-item active" data-sm-img="https://s1.ax1x.com/2020/04/26/J6OHSA.jpg" data-lg-img="https://s1.ax1x.com/2020/04/26/J6Ojw8.jpg"></div>
-            <div class="carousel-item" data-sm-img="https://s1.ax1x.com/2020/04/26/J6ObQI.jpg" data-lg-img="https://s1.ax1x.com/2020/04/26/J6OTWd.jpg"></div>
-            <div class="carousel-item" data-sm-img="https://s1.ax1x.com/2020/04/26/J6OLOP.jpg" data-lg-img="https://s1.ax1x.com/2020/04/26/J6OvTS.jpg"></div>
-
+            <div class="carousel-item active" data-sm-img="/image/slide03_900x410.png" data-lg-img="/image/slide03_2000x410.png"></div>
+            <!-- <div class="carousel-item" data-sm-img="https://s1.ax1x.com/2020/05/19/Y5m7Bq.jpg" data-lg-img="https://s1.ax1x.com/2020/05/19/Y5mHH0.jpg"></div> -->
         </div>
         <a class="carousel-control-prev" href="#lk_carousel" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -123,30 +129,31 @@
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="sr-only">Next</span>
         </a>
-
     </section>
     <!-----------------------轮播图end--------------------------->
     <!--------------------正式比赛begin------------------------------>
-    <section id="form_race">
+    <section id="form_race" style="display: none;">
         <!--标题-->
         <div class="text-center mt-3 mb-3">
             <h5><strong>正式比赛</strong></h5>
             <img src="~/image/star.png" alt="">
         </div>
         <!-- 比赛规则和答题按钮 -->
-        <div class="container" id="match-rule-block">
+        <div class="container" id="match-rule-block" style="display: none;">
             <div class="row justify-content-center align-items-center">
                 <h6 class="text-success">比赛规则</h6>
                 <p class="p-3">
-                    参赛者有5次答题机会，每次答题会从题库中抽取10道题目，共有50道题。每个题目对应2个积分，参赛者答对题目则得分，答错则没有分数，个人成绩以5次答题后的总得分为最终成绩。得分情况会在排行榜里显示。
+                    参赛者有3次答题机会，共计10分钟，每次答题10道题。每道题对应10个积分，参赛者答对题目则得分，答错则没有分数，个人成绩以3次答题后的最高分为最终成绩。得分情况会在排行榜里显示。
                 </p>
-                <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#" id="match-btn">开始比赛</button>
+                <button class="btn btn-success" type="button" data-toggle="modal" data-target="#"
+                        id="match-btn">
+                    开始比赛
+                </button>
             </div>
-
         </div>
-
         <!-- Modal -->
-        <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog"
+             aria-labelledby="exampleModalLongTitle" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -156,16 +163,15 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <p>你有十分钟的时间回答比赛单选题/多选题/判断题和填空题，祝你好运！</p>
+                        <p>你有十分钟的时间回答10道单选题，祝你好运！</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">我知道了</button>
-                        <button type="button" class="btn btn-primary" id="start_match">开始答题</button>
+                        <button type="button" class="btn btn-success" id="start_match">开始答题</button>
                     </div>
                 </div>
             </div>
         </div>
-
         <!-- 我的成绩 -->
         <div class="container" id="my-score-block">
             <div class="row justify-content-center align-items-center text-center">
@@ -204,13 +210,11 @@
                                 <h6>答题次数</h6>
                             </p>
                         </div>
-
                     </div>
                 </div>
-                <button class="btn btn-primary " id="continue-match">继续比赛</button>
+                <button class="btn btn-outline-success " id="continue-match">继续比赛</button>
             </div>
         </div>
-
     </section>
     <!--------------------正式比赛end------------------------------>
     <!--------------------赛前练习-begin------------------------------>
@@ -226,7 +230,8 @@
                 <div class="col-md-6 col-lg-6 ">
                     <div class="media d-flex align-items-center m-1 mb-3 aa p-2" id="entrance1" style="cursor:pointer;">
                         <div class="media-left mr-2">
-                            <img src="~/image/yjh.png" alt="" class="media-object rounded-circle img-fluid img-thumbnail" width="100">
+                            <img src="~/image/yjh.png" alt="" class="media-object rounded-circle img-fluid img-thumbnail"
+                                 width="100">
                         </div>
                         <div class="media-body">
                             <h6 class="media-heading">
@@ -236,9 +241,11 @@
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-6 ">
-                    <div class="media d-flex align-items-center m-1 mb-3 aa p-2 " id="entrance2" style="cursor:pointer;">
+                    <div class="media d-flex align-items-center m-1 mb-3 aa p-2 " id="entrance2"
+                         style="cursor:pointer;">
                         <div class="media-left mr-2">
-                            <img src="~/image/js.png" alt="" class="media-object rounded-circle img-fluid img-thumbnail" width="100">
+                            <img src="~/image/js.png" alt="" class="media-object rounded-circle img-fluid img-thumbnail"
+                                 width="100">
                         </div>
                         <div class="media-body">
                             <h6 class="media-heading">
@@ -250,7 +257,8 @@
                 <div class="col-md-6 col-lg-6">
                     <div class="media d-flex align-items-center m-1 mb-3 aa p-2" id="entrance3" style="cursor:pointer;">
                         <div class="media-left mr-2">
-                            <img src="~/image/wzs.png" alt="" class="media-object rounded-circle img-fluid img-thumbnail" width="100">
+                            <img src="~/image/wzs.png" alt="" class="media-object rounded-circle img-fluid img-thumbnail"
+                                 width="100">
                         </div>
                         <div class="media-body">
                             <h6 class="media-heading">
@@ -262,7 +270,8 @@
                 <div class="col-md-6 col-lg-6">
                     <div class="media d-flex align-items-center m-1 mb-3 aa p-2" id="entrance4" style="cursor:pointer;">
                         <div class="media-left mr-2">
-                            <img src="~/image/yy.png" alt="" class="media-object rounded-circle img-fluid img-thumbnail" width="100">
+                            <img src="~/image/yy.png" alt="" class="media-object rounded-circle img-fluid img-thumbnail"
+                                 width="100">
                         </div>
                         <div class="media-body">
                             <h6 class="media-heading">
@@ -288,69 +297,44 @@
                 <div class="card-header">
                     <ul class="nav nav-tabs card-header-tabs justify-content-center" id="myTab" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">比赛流程</a>
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                               aria-controls="home" aria-selected="true">比赛流程</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">活动目的</a>
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                               aria-controls="profile" aria-selected="false">活动背景</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">奖项设置</a>
+                            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab"
+                               aria-controls="contact" aria-selected="false">活动目的</a>
                         </li>
                     </ul>
                 </div>
                 <div class="card-body tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                        <h5 class="card-title">练习答题环节<br><small class="text-success">(04-27 10:00 ~ 05-03 22:00)</small></h5>
+                        <h5 class="card-title">
+                            十月团日活动<br><small class="text-success">(10-24 17:00 ~ 10-24 22:00)</small>
+                        </h5>
                         <p class="card-text">
-                            1. 题目按四个类型分类：单选/多选/判断/填空，四个类型分别对应四个关口。<br>
+                            点击报名参赛后完善信息，点击开始答题即可进入答题，排名将展现在下方。
                         </p>
                         <p class="card-text">
-                            2. 正式竞赛开始前，每个关口涵盖的是竞赛端口内所包含的各类型题目，学生可以在各种类型的题目关口自行练习题目，关口会记录练习时长和练习数量。
+                            参赛者有3次答题机会，共计10分钟，每次答题10道题。每道题对应10个积分，参赛者答对题目则得分，答错则没有分数，个人成绩以3次答题后的最高分为最终成绩。得分情况会在排行榜里显示。
                         </p>
                         <p class="card-text">
-                            3. 系统练习排名依据：min(练习时间, 练习数量 x 10)
-                        </p>
-                        <h5 class="card-title">竞赛答题环节<br><small class="text-success">(05-04 10:00 ~ 05-07 22:00)</small></h5>
-                        <p class="card-text">
-                            1.竞赛答题开始后，练习答题的端口将会关闭，参赛者有5次答题机会，每次答题会从题库中抽取5个选择题，3个判断题，2个填空题，以供作答。<br>
-                        </p>
-                        <p class="card-text">
-                            2. 每个题目对应2个积分。参赛者答对题目则积累积分，答错则没有积分，个人成绩以5次答题后的总积分为最终成绩。
-                        </p>
-                        <p class="card-text">
-                            3. 系统竞赛排名依据：竞赛总得分 x 10000 - 竞赛所用总时间
-                        </p>
-                        <h5 class="card-title">排名</h5>
-                        <p class="card-text">
-                            学生于竞赛期间内完成线上答题。主办方根据学院参与人数进行综合排名。
+                            系统竞赛排名依据：竞赛总得分 x 10000 - 竞赛所用总时间
                         </p>
                     </div>
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-
+                        <h5 class="card-title">背景</h5>
                         <p class="card-text">
-                            &nbsp;在疫情防控期间，全体高校学生遵照学校要求，在家待命等候学校通知。信息学院团委意识到需要在此期间督促和倡导学生们“即使宅在家中也要自主学习”的必要性，因此为了促使学生们更加积极的投入学习，营造学院良好的学习氛围，掀起学院学生们的学习热潮。云南财经大学信息学院团委组织举办了本次线上知识竞赛活动。
+                            &nbsp;以知识竞赛的方式，不断深化爱国主义教育、扎实党国知识，增强荣誉感与责任感。
                         </p>
-
                     </div>
                     <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                        <h5 class="card-title">智慧之星</h5>
+                        <h5 class="card-title">目的及意义</h5>
                         <p class="card-text">
-                            竞赛答题环节结束后，得分排名在全体参与人员前5%的同学
-
-                        </p>
-                        <h5 class="card-title">知识之星</h5>
-                        <p class="card-text">
-                            竞赛答题环节结束后，得分排名全体参与人员前25%-5%的同学
-
-                        </p>
-                        <h5 class="card-title">好学之星</h5>
-                        <p class="card-text">
-                            练习答题环节开启期间，练习答题练习排名前30的同学
-
-                        </p>
-                        <h5 class="card-title">最佳组织奖</h5>
-                        <p class="card-text">
-                            竞赛答题环节结束后，班级平均分和班级参与人员总体排在前3的班级体。评价标准按照班级平均分占60%，班级参与人员占40%的原则
+                            向英雄致敬，向身边的榜样学习，提高品行作风，敢于负责、勇于担当、善于作为，不负党和人民重托，不辱时代使命。
                         </p>
                     </div>
                 </div>
@@ -373,19 +357,16 @@
             </div>
             <!-- 滚动条容器 -->
             <div class="container">
-                <ul class="nav nav-pills nav-fill mb-3" id="pills-tab" role="tablist">
+                <!-- <ul class="nav nav-pills nav-fill mb-3" id="pills-tab" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active" style="border-radius:50px;" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">练习排名</a>
+                        <a class="nav-link  active" style="border-radius:50px; color: rgb(89, 170, 8); " id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">练习排名</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" style="border-radius:50px;" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">竞赛排名</a>
+                        <a class="nav-link " style="border-radius:50px; color: rgb(89, 170, 8);" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">竞赛排名</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" style="border-radius:50px;" id="pills-class-tab" data-toggle="pill" href="#pills-class" role="tab" aria-controls="pills-class" aria-selected="false">班级竞赛排名</a>
-                    </li>
-                </ul>
+                </ul> -->
                 <div class="tab-content" id="pills-tabContent">
-                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                    <div class="tab-pane fade " id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                         <div class="personal_rank table-responsive">
                             <table class="table table-bordered text-center table-hover">
                                 <thead>
@@ -401,9 +382,9 @@
                             </table>
                             <span id="p_ranklist_count"></span>
                         </div>
-
                     </div>
-                    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                    <div class="tab-pane fade show active" id="pills-profile" role="tabpanel"
+                         aria-labelledby="pills-profile-tab">
                         <div class="personal_rank table-responsive">
                             <table class="table table-bordered text-center table-hover">
                                 <thead>
@@ -412,30 +393,12 @@
                                         <th scope="col">姓名</th>
                                         <th scope="col">分数</th>
                                         <th scope="col">答题时间</th>
-                                        <th scope="col">次数</th>
                                     </tr>
                                 </thead>
                                 <tbody class="pre-scroller " id="m_ranklist">
                                 </tbody>
                             </table>
                             <span id="m_ranklist_count"></span>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="pills-class" role="tabpanel" aria-labelledby="pills-class-tab">
-                        <div class="personal_rank table-responsive">
-                            <table class="table table-bordered text-center table-hover">
-                                <thead>
-                                    <tr class="thead-light">
-                                        <th scope="col">名次</th>
-                                        <th scope="col">班级</th>
-                                        <th scope="col">参与人数</th>
-                                        <th scope="col">平均分</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="pre-scroller " id="c_ranklist">
-                                </tbody>
-                            </table>
-                            <span id="c_ranklist_count"></span>
                         </div>
                     </div>
                 </div>
@@ -448,14 +411,11 @@
         <div class="container">
             <div class="row d-flex justify-content-between align-items-center">
                 <div class="col-lg-12 text-center">
-                    <h6>主办方：云南财经大学信息学院学生会</h6>
-                    <h6>
-                        QQ群：887553295
-                        <a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=6e06cc1bb4b15258edeaf3c5ad65c325e53a7d03893ab4c8665610d369000889"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="线上知识竞赛" title="线上知识竞赛"></a>
-                    </h6>
-                    <h6>技术支持：电脑爱好者协会</h6>
+                    <h6>云南财经大学·信息学院·<a href="/Main/Index/">电脑爱好者协会</a></h6>
+                    <!-- <h6>
+                        QQ群：703963715
+                        <a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=234b18a0d2b7659e1d180325ce7da8c98957d9dc6524e3956bec857573d65a59"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="临时活动群" title="临时活动群"></a>                    </h6> -->
                 </div>
-
             </div>
         </div>
     </footer>
@@ -465,7 +425,7 @@
     <script type="text/javascript" src="~/js/popper.js.1.14.0/content/Scripts/popper.js"></script>
     <script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
     <script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-    <script type="text/javascript" src="~/js/index_match.js"></script>
+    @*<script type="text/javascript" src="~/js/index_match.js"></script>*@
 </body>
 
 </html>

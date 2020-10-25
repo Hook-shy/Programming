@@ -1,33 +1,31 @@
 /*************************通用样式-begin***************************/
-body{
+body {
     color: #000;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     /* padding-top: 105px;  */
 }
 
-a:hover{
-  text-decoration: none;
+a:hover {
+    text-decoration: none;
 }
 
-ul,ol{
+ul,
+ol {
     list-style: none;
 }
 /* 修改0 */
-h5{
-    color: rgb(19, 15, 206);
+h5 {
+    color: rgb(15, 206, 47);
 }
 
 /*设置字体*/
 @font-face {
     font-family: lk;
-    src: url('../fonts/lk.eot') format('embedded-opentype'),
-    url('../fonts/lk.svg') format('svg'),
-    url('../fonts/lk.ttf') format('truetype'),
-    url('../fonts/lk.woff') format('woff');
+    src: url("/fonts/lk.eot") format("embedded-opentype"), url("/fonts/lk.svg") format("svg"), url("/fonts/lk.ttf") format("truetype"), url("/fonts/lk.woff") format("woff");
 }
 
 [class^="icon-"],
-[class*=" icon-"]{
+[class*=" icon-"] {
     font-family: lk;
     font-style: normal;
 }
@@ -35,80 +33,79 @@ h5{
 /*按钮的自定义*/
 .btn-lk {
     color: #ffffff;
-    background-color: rgb(19, 15, 206);
-    border-color: rgb(19, 15, 206);
+    background-color: rgb(15, 206, 56);
+    border-color: rgb(6, 155, 26);
 }
 
-.btn-lk:hover,
-.btn-lk:focus,
-.btn-lk:active,
-.btn-lk.active,
-.open .dropdown-toggle.btn-lk {
-    color: #ffffff;
-    background-color: rgb(19, 15, 206);
-    border-color: rgb(19, 15, 206);
-}
+    .btn-lk:hover,
+    .btn-lk:focus,
+    .btn-lk:active,
+    .btn-lk.active,
+    .open .dropdown-toggle.btn-lk {
+        color: #ffffff;
+        background-color: rgb(86, 238, 15);
+        border-color: rgb(32, 241, 67);
+    }
 
-.btn-lk:active,
-.btn-lk.active,
-.open .dropdown-toggle.btn-lk {
-    background-image: none;
-}
+    .btn-lk:active,
+    .btn-lk.active,
+    .open .dropdown-toggle.btn-lk {
+        background-image: none;
+    }
 
-.btn-lk.disabled,
-.btn-lk[disabled],
-fieldset[disabled] .btn-lk,
-.btn-lk.disabled:hover,
-.btn-lk[disabled]:hover,
-fieldset[disabled] .btn-lk:hover,
-.btn-lk.disabled:focus,
-.btn-lk[disabled]:focus,
-fieldset[disabled] .btn-lk:focus,
-.btn-lk.disabled:active,
-.btn-lk[disabled]:active,
-fieldset[disabled] .btn-lk:active,
-.btn-lk.disabled.active,
-.btn-lk[disabled].active,
-fieldset[disabled] .btn-lk.active {
-    background-color: rgb(19, 15, 206);
-    border-color: rgb(19, 15, 206);
-}
+    .btn-lk.disabled,
+    .btn-lk[disabled],
+    fieldset[disabled] .btn-lk,
+    .btn-lk.disabled:hover,
+    .btn-lk[disabled]:hover,
+    fieldset[disabled] .btn-lk:hover,
+    .btn-lk.disabled:focus,
+    .btn-lk[disabled]:focus,
+    fieldset[disabled] .btn-lk:focus,
+    .btn-lk.disabled:active,
+    .btn-lk[disabled]:active,
+    fieldset[disabled] .btn-lk:active,
+    .btn-lk.disabled.active,
+    .btn-lk[disabled].active,
+    fieldset[disabled] .btn-lk.active {
+        background-color: rgb(102, 250, 16);
+        border-color: rgb(84, 235, 15);
+    }
 
-.btn-lk .badge {
-    color: rgb(19, 15, 206);
-    background-color: #ffffff;
-}
+    .btn-lk .badge {
+        color: rgb(15, 206, 47);
+        background-color: #ffffff;
+    }
 
 /*************************通用样式-end***************************/
 
-
-
 /*************************头部-begin***************************/
 
-
 /*导航*/
-#lk_header .navbar-lk{
+#lk_header .navbar-lk {
     background: #fff;
 }
 
-#lk_header .navbar-lk .navbar-brand{
-    height: 90px;
-    /*background-color: red;*/
-    margin-left: 15px;
-    margin-right: 100px;
-}
+    #lk_header .navbar-lk .navbar-brand {
+        height: 90px;
+        /*background-color: red;*/
+        margin-left: 15px;
+        margin-right: 100px;
+    }
 
-#lk_header .navbar-lk .navbar-brand img{
-   width: 70px;
-}
-#lk_header .img2{
+        #lk_header .navbar-lk .navbar-brand img {
+            width: 70px;
+        }
+
+#lk_header .img2 {
     width: 40px;
 }
-#lk_header .img3{
+
+#lk_header .img3 {
     width: 20px;
 }
 
-#lk_header .navbar-lk .navbar-nav>li>a{
+#lk_header .navbar-lk .navbar-nav > li > a {
     height: 70px;
     /*background-color: red;*/
     display: flex;
@@ -117,90 +114,85 @@ fieldset[disabled] .btn-lk.active {
     margin-right: 50px;
 }
 
-#lk_header .navbar-lk .navbar-nav>li>a:hover{
-    border-bottom: 2px solid rgb(19, 15, 206);
-}
+    #lk_header .navbar-lk .navbar-nav > li > a:hover {
+        border-bottom: 2px solid rgb(144, 248, 130);
+    }
 
-#lk_header .navbar-lk .navbar-toggler{
+#lk_header .navbar-lk .navbar-toggler {
     margin-top: 5px;
 }
 /*************************头部-end***************************/
 
-
-
 /*************************轮播图-begin***************************/
 
-#lk_carousel .carousel-item{
+#lk_carousel .carousel-item {
     background: no-repeat center center;
     -webkit-background-size: cover;
     background-size: cover;
 }
 
-#lk_carousel .carousel-item img{
-    width: 100%;
-}
+    #lk_carousel .carousel-item img {
+        width: 100%;
+    }
 
-@media screen and (min-width: 900px){
-    #lk_carousel .carousel-item{
+@media screen and (min-width: 900px) {
+    #lk_carousel .carousel-item {
         height: 410px;
     }
 }
 /*************************轮播图-end***************************/
 
-
-
 /*************************赛前练习-begin***************************/
-#lk_hot .aa{
+#lk_hot .aa {
     background-color: #f8f9fa;
 }
-#lk_hot .aa:hover{
-    background-color:#ececec;
-}
+
+    #lk_hot .aa:hover {
+        background-color: #ececec;
+    }
 
 /*************************赛前练习-end***************************/
 
 /*************************比赛详情-begin***************************/
 /* 修改0 */
-#bsxq .card-header{
-    background-color: rgb(187, 247, 255)
-}
-#bsxq .nav-tabs>li>a{
-    color: #000;
+#bsxq .card-header {
+    background-color: rgb(203, 255, 187);
 }
 
+#bsxq .nav-tabs > li > a {
+    color: #000;
+}
 
 /*************************比赛详情-end***************************/
 
 /****************************排行榜begin********************************/
-.table>tbody>tr>td{
-    border:0;
+.table > tbody > tr > td {
+    border: 0;
 }
 /* 修改0 */
-.table>thead>tr>th{
-    border:0;
+.table > thead > tr > th {
+    border: 0;
 }
 
-.table>tbody>tr{
+.table > tbody > tr {
     border-bottom: 1px solid rgb(231, 230, 230);
 }
 /****************************排行榜end********************************/
 
-
-
 /*************************尾部-begin***************************/
-#lk_footer{
+#lk_footer {
     width: 100%;
     height: 200px;
-    background: url("../../image/ft_bg_match.png") no-repeat center;
+    background: url("/image/ft_bg_match.png") no-repeat center;
     color: #000;
 }
 
-#lk_footer .container .row{
-    /*background-color: red;*/
-    height: 200px;
-}
+    #lk_footer .container .row {
+        /*background-color: red;*/
+        height: 200px;
+    }
 
-#lk_footer .container .row a{
-    color: #000;
-}
+        #lk_footer .container .row a {
+            color: #000;
+        }
 /*************************尾部-end***************************/
