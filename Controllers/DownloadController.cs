@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.StaticFiles;
 using Programming.Models;
 using Programming.Server;
 using Programming.Utils;
@@ -46,7 +47,7 @@ namespace Programming.Controllers
                     List<DownloadItem> items = _downloaditemcontext.DownloadItems.AsEnumerable().ToList();
                     ViewData["Items"] = items;
                     List<User> users = new List<User>();
-                    foreach(var d in items)
+                    foreach (var d in items)
                     {
                         users.Add(_usercontext.Users.AsEnumerable().FirstOrDefault(u => u.Id == d.UserId));
                     }
@@ -150,6 +151,62 @@ namespace Programming.Controllers
                     ViewData["Tip"] = new Tip("提示", "上传文件", "上传失败", "text-danger", 5000);
                     ViewData["Tab"] = "upload-file";
                     return View("Download");
+                }
+            }
+            return RedirectToAction("Login", "Login");
+        }
+
+        [Route("[controller]/[action]/{id}")]
+        public IActionResult DownloadFile([FromRoute]int id)
+        {
+            string sessionCode = "";
+            Request.Cookies.TryGetValue("SessionCode", out sessionCode);
+            ViewData["User"] = null;
+            if (!string.IsNullOrEmpty(sessionCode))
+            {
+                User user = UserServer.CheckSessionCode(sessionCode, _usercontext);
+                if (user != null)
+                {
+                    DownloadItem downloadItem = _downloaditemcontext.DownloadItems.AsEnumerable().FirstOrDefault(d => d.Id == id);
+                    if (downloadItem != null)
+                    {
+                        string path = hostingEnvironment.WebRootPath + downloadItem.Url;
+                        FileStream stream = System.IO.File.OpenRead(path);
+                        string fileExt = Path.GetExtension(path);
+                        downloadItem.DownloadCount++;
+                        _downloaditemcontext.DownloadItems.Update(downloadItem);
+                        _downloaditemcontext.SaveChanges();
+                        return File(stream, "application/octet-stream", Path.GetFileName(path));
+                    }
+                    return RedirectToAction("Download");
+                }
+            }
+            return RedirectToAction("Login", "Login");
+        }
+
+        [Route("[controller]/[action]/{id}")]
+        public IActionResult DeleteFile([FromRoute]int id)
+        {
+            string sessionCode = "";
+            Request.Cookies.TryGetValue("SessionCode", out sessionCode);
+            ViewData["User"] = null;
+            if (!string.IsNullOrEmpty(sessionCode))
+            {
+                User user = UserServer.CheckSessionCode(sessionCode, _usercontext);
+                if (user != null)
+                {
+                    DownloadItem downloadItem = _downloaditemcontext.DownloadItems.AsEnumerable().FirstOrDefault(d => d.Id == id);
+                    if(downloadItem != null)
+                    {
+                        _downloaditemcontext.DownloadItems.Remove(downloadItem);
+                        _downloaditemcontext.SaveChanges();
+                        string path = hostingEnvironment.WebRootPath + downloadItem.Url;
+                        if (System.IO.File.Exists(path))
+                        {
+                            System.IO.File.Delete(path);
+                        }
+                    }
+                    return RedirectToAction("Download");
                 }
             }
             return RedirectToAction("Login", "Login");

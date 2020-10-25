@@ -12,10 +12,14 @@ namespace Programming.Controllers
     public class MainController : Controller
     {
         private readonly UserContext _usercontext;
+        private readonly ArticleContext _articlecontext;
+        private readonly DownloadItemContext _downloaditemcontext;
 
-        public MainController(UserContext userContext)
+        public MainController(UserContext userContext, ArticleContext articleContext, DownloadItemContext downloadItemContext)
         {
             _usercontext = userContext;
+            _articlecontext = articleContext;
+            _downloaditemcontext = downloadItemContext;
         }
 
         public IActionResult LogOut()
@@ -38,6 +42,11 @@ namespace Programming.Controllers
                 }
             }
             ViewData["Title"] = "一站式编程学习平台|首页";
+            int count = _articlecontext.Articles.AsEnumerable().Count();
+            ViewData["NewArticleList"] = _articlecontext.Articles.AsEnumerable().OrderBy(a => a.CreateDate).Reverse().ToList().GetRange(0, count > 10 ? 10 : count);
+            ViewData["HotArticleList"] = _articlecontext.Articles.AsEnumerable().OrderBy(a => a.LookCount).Reverse().ToList().GetRange(0, count > 10 ? 10 : count);
+            count = _downloaditemcontext.DownloadItems.AsEnumerable().Count();
+            ViewData["DownloadItem"] = _downloaditemcontext.DownloadItems.AsEnumerable().OrderBy(d => d.CreateDate).Reverse().ToList().GetRange(0, count > 10 ? 10 : count);
             ViewData["Controller"] = "Main";
             ViewData["Action"] = "Index";
             return View();

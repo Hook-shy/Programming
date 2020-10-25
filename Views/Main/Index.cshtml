@@ -3,6 +3,9 @@
 *@
 @{
     Layout = "~/Views/Shared/_Main.cshtml";
+    List<Article> newArticles = (List<Article>)ViewData["NewArticleList"];
+    List<Article> hotArticles = (List<Article>)ViewData["HotArticleList"];
+    List<DownloadItem> downloads = (List<DownloadItem>)ViewData["DownloadItem"];
 }
     <!-- ----------------------------代码空间+轮播begin----------------------------------------- -->
     <section id="apeak_carousel_code" class="mt-5">
@@ -80,14 +83,17 @@
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                             <div class="container">
-                                <div class="row apeak_item">
-                                    <div class="col-md-4 col-sm-4 d-flex justify-content-center align-items-center"><img class="img-thumbnail" src="~/image/carousel1.jpg" alt=""></div>
-                                    <div class="col-md-8 col-sm-8 mt-3">
-                                        <h5>人工智能</h5>
-                                        <h6>人工智能（Artificial Intelligence），英文缩写为AI。它是研究、开发用于模拟、延伸和扩展人的智能的理论、方法、技术及应用系统的一门新的技术科学。</h6>
-                                        <h6 class="text-muted">2020-01-01</h6>
+                                @foreach (Article article in newArticles)
+                                {
+                                    <div class="row apeak_item">
+                                        @*<div class="col-md-4 col-sm-4 d-flex justify-content-center align-items-center"><img class="img-thumbnail" src="~/image/carousel1.jpg" alt=""></div>*@
+                                        <div class="col-md-12 col-sm-12 mt-3">
+                                            <h5><a href="/Article/Read/@article.Id">@article.Title</a></h5>
+                                            <h6>@article.Content.Substring(0, article.Content.Length >= 200 ? 200 : article.Content.Length - 1)...</h6>
+                                            <h6 class="text-muted">@article.CreateDate.ToString("yyyy-MM-dd")</h6>
+                                        </div>
                                     </div>
-                                </div>
+                                }
 
                                 <div class="row apeak_item">
                                     <div class="col-md-4 col-sm-4 d-flex justify-content-center align-items-center"><img class="img-thumbnail" src="~/image/bacgroud1.jpg" alt=""></div>
@@ -102,6 +108,17 @@
 
                         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                             <div class="container">
+                                @foreach (Article article in hotArticles)
+                                {
+                                    <div class="row apeak_item">
+                                        @*<div class="col-md-4 col-sm-4 d-flex justify-content-center align-items-center"><img class="img-thumbnail" src="~/image/carousel1.jpg" alt=""></div>*@
+                                        <div class="col-md-12 col-sm-12 mt-3">
+                                            <h5><a href="/Article/Read/@article.Id">@article.Title</a></h5>
+                                            <h6>@article.Content.Substring(0, article.Content.Length >= 200 ? 200 : article.Content.Length - 1)...</h6>
+                                            <h6 class="text-muted">@article.CreateDate.ToString("yyyy-MM-dd")</h6>
+                                        </div>
+                                    </div>
+                                }
                                 <div class="row apeak_item">
                                     <div class="col-md-4 col-sm-4 d-flex justify-content-center align-items-center"><img class="img-thumbnail" src="~/image/bcg.jpg" alt=""></div>
                                     <div class="col-md-8 col-sm-8 mt-3">
@@ -121,18 +138,22 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="profile-tab">
+                            <div class="container">
+
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div class="apeak_duty" style="height: 400px; overflow:scroll">
+                    <div class="apeak_duty" >
                         <h6 class="text-center pt-2">下载专区</h6>
                         <ul class="list-group list-group-flush">
-                            <a href="#"><li class="list-group-item">Cras justo odio</li></a>
-                            <a href="#"><li class="list-group-item">Dapibus ac facilisis in</li></a>
-                            <a href="#"><li class="list-group-item">Morbi leo risus</li></a>
-                            <a href="#"><li class="list-group-item">Porta ac consectetur ac</li></a>
-                            <a href="#"><li class="list-group-item">Vestibulum at eros</li></a>
-
+                            @foreach (DownloadItem download in downloads)
+                            {
+                                <li class="list-group-item" title="上传于 @download.CreateDate.ToString("yyyy-MM-dd")"><a href="/Download/Download">@download.Title</a></li>
+                            }
                         </ul>
                     </div>
                 </div>
