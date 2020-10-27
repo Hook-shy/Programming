@@ -12,12 +12,6 @@ namespace Programming.Server
 {
     public class CodeRun
     {
-
-        public CodeRun(string s)
-        {
-
-        }
-
         public static string Start(string lang, string language, string code, string classname)
         {
             Debug.WriteLine(lang);

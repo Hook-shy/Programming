@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Programming.Models;
+using Programming.Server;
 
 namespace Programming.Controllers
 {
@@ -19,8 +20,21 @@ namespace Programming.Controllers
         [Route("[controller]/[action]/{id=0}")]
         public IActionResult Index()
         {
-            ViewData["Title"] = "一站式编程学习平台|知识竞赛";
-            return View();
+            string sessionCode = "";
+            Request.Cookies.TryGetValue("SessionCode", out sessionCode);
+            ViewData["User"] = null;
+            if (!string.IsNullOrEmpty(sessionCode))
+            {
+                User user = UserServer.CheckSessionCode(sessionCode, _usercontext);
+                if (user != null)
+                {
+                    ViewData["User"] = user;
+                    ViewData["Title"] = "一站式编程学习平台|知识竞赛";
+                    return View();
+
+                }
+            }
+            return RedirectToAction("Login", "Login");
         }
 
         [Route("[controller]/[action]/{id=0}")]

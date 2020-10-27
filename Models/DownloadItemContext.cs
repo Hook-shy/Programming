@@ -8,10 +8,7 @@ namespace Programming.Models
 {
     public class DownloadItemContext : DbContext
     {
-        public DownloadItemContext(DbContextOptions<DownloadItemContext> options) : base(options)
-        {
-
-        }
+        public DownloadItemContext(DbContextOptions<DownloadItemContext> options) : base(options) { }
 
         public DbSet<DownloadItem> DownloadItems { get; set; }
         /*

@@ -38,5 +38,6 @@ namespace Programming.Models
         public int CQPoint { get; set; } = 2;
         public int MatchTimes { get; set; } = 3;
         public ScoreType ScoreType { get; set; } = ScoreType.MAX;
+        public bool Enable { get; set; }
     }
 }

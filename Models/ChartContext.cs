@@ -8,10 +8,7 @@ namespace Programming.Models
 {
     public class ChartContext : DbContext
     {
-        public ChartContext(DbContextOptions<ChartContext> options) : base(options)
-        {
-
-        }
+        public ChartContext(DbContextOptions<ChartContext> options) : base(options) { }
 
         public DbSet<Chart> Charts { get; set; }
         /*

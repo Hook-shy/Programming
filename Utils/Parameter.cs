@@ -14,7 +14,7 @@ namespace Programming.Utils
         public string Password { get; set; }
     }
 
-    public class RegisterParameter:LoginParameter
+    public class RegisterParameter : LoginParameter
     {
         public string Nick { get; set; }
         public string Code { get; set; }

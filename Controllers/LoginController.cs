@@ -104,7 +104,7 @@ namespace Programming.Controllers
                 ViewData["CodeMsg"] = "验证码不正确";
                 return View();
             }
-            User user = _usercontext.Users.AsEnumerable().FirstOrDefault(u => u.Mail.Equals(parameter.Mail) && u.CreateDate < new DateTime(2000, 1, 1));
+            User user = _usercontext.Users.AsEnumerable().FirstOrDefault(u => u.Mail.Equals(parameter.Mail) && u.Birthday < new DateTime(2000, 1, 1));
             if(user != null)
             {
                 user.Nick = parameter.Nick;

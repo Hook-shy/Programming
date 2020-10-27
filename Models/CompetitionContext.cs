@@ -8,10 +8,7 @@ namespace Programming.Models
 {
     public class CompetitionContext : DbContext
     {
-        public CompetitionContext(DbContextOptions<CompetitionContext> options) : base(options)
-        {
-
-        }
+        public CompetitionContext(DbContextOptions<CompetitionContext> options) : base(options) { }
 
         public DbSet<Competition> Competitions { get; set; }
         /*

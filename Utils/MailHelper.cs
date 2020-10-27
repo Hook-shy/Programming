@@ -3,9 +3,11 @@ using Programming.Server;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
+
+using MailKit.Net.Smtp;
+using MimeKit;
 
 namespace Programming.Utils
 {
@@ -36,6 +38,8 @@ namespace Programming.Utils
         /// </summary>
         public string To { get; set; }
 
+        public string ToName { get; set; } = "";
+
         /// <summary>
         /// 标题
         /// </summary>
@@ -63,36 +67,59 @@ namespace Programming.Utils
 
         public string SendMail()
         {
-            //实例化Smtp客户端
-            SmtpClient smtp = new SmtpClient
-            {
-                EnableSsl = true,
-                UseDefaultCredentials = false,
-                Host = Host,
-                Credentials = new System.Net.NetworkCredential(From, Code)
-            };
-
-            MailMessage mailMessage = new MailMessage($"\"{FromName}\"{From}", To)
-            {
-
-                Subject = MailTitle,
-                SubjectEncoding = Encoding.UTF8,
-                Body = MailBody,
-                BodyEncoding = Encoding.Default,
-                //邮件优先级
-                Priority = MailPriority.Normal,
-                IsBodyHtml = Ishtml
-            };
-
-            System.Diagnostics.Debug.WriteLine($"from:{From}\nto:{To}\npwd:{Code}\nhost:{Host}\ntitle:{MailTitle}\nbody:{MailBody}");
+            MimeMessage message = new MimeMessage();
+            message.From.Add(new MailboxAddress(FromName, From));
+            message.To.Add(new MailboxAddress(ToName, To));
+            message.Subject = MailTitle;
+            message.Body = new TextPart("plain") { Text = MailBody };
             try
             {
-                smtp.Send(mailMessage);
+                using (SmtpClient client = new SmtpClient())
+                {
+                    client.ServerCertificateValidationCallback = (s, c, h, e) => true;
+                    client.Connect(Host, 25, false);
+                    client.AuthenticationMechanisms.Remove("XOAUTH2");
+                    client.Authenticate(From, Code);
+                    client.Send(message);
+                    client.Disconnect(true);
+                }
             }
             catch (Exception ex)
             {
                 return $"Message:{ex.Message}\nStackTrace:{ex.StackTrace}\nInnerException:{ex.InnerException}\nSource:{ex.Source}\nData:{ex.Data}\nHResult:{ex.HResult}\nTargetSite:{ex.TargetSite}";
             }
+
+
+
+            ////实例化Smtp客户端
+            //SmtpClient smtp = new SmtpClient
+            //{
+            //    EnableSsl = true,
+            //    UseDefaultCredentials = false,
+            //    Host = Host,
+            //    Credentials = new System.Net.NetworkCredential(From, Code)
+            //};
+
+            //MailMessage mailMessage = new MailMessage($"\"{FromName}\"{From}", To)
+            //{
+            //    Subject = MailTitle,
+            //    SubjectEncoding = Encoding.UTF8,
+            //    Body = MailBody,
+            //    BodyEncoding = Encoding.Default,
+            //    //邮件优先级
+            //    Priority = MailPriority.Normal,
+            //    IsBodyHtml = Ishtml
+            //};
+
+            //System.Diagnostics.Debug.WriteLine($"from:{From}\nto:{To}\npwd:{Code}\nhost:{Host}\ntitle:{MailTitle}\nbody:{MailBody}");
+            //try
+            //{
+            //    smtp.Send(mailMessage);
+            //}
+            //catch (Exception ex)
+            //{
+            //    return $"Message:{ex.Message}\nStackTrace:{ex.StackTrace}\nInnerException:{ex.InnerException}\nSource:{ex.Source}\nData:{ex.Data}\nHResult:{ex.HResult}\nTargetSite:{ex.TargetSite}";
+            //}
             return "true";
         }
     }

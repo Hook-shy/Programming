@@ -12,7 +12,7 @@ namespace Programming.Server
     {
         public static bool ExistUser(string mail, UserContext userContext)
         {
-            return userContext.Users.AsEnumerable().FirstOrDefault<User>(u => u.Mail.Equals(mail.ToLower()) && u.CreateDate > new DateTime(2000, 1, 1)) != null;
+            return userContext.Users.AsEnumerable().FirstOrDefault<User>(u => u.Mail.Equals(mail.ToLower()) && !string.IsNullOrEmpty(u.Password)) != null;
         }
 
         public static bool ExistNick(string nick, UserContext userContext)

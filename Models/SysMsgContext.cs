@@ -8,10 +8,7 @@ namespace Programming.Models
 {
     public class SysMsgContext : DbContext
     {
-        public SysMsgContext(DbContextOptions<SysMsgContext> options) : base(options)
-        {
-
-        }
+        public SysMsgContext(DbContextOptions<SysMsgContext> options) : base(options) { }
 
         public DbSet<SysMsg> UserMessages { get; set; }
         /*
