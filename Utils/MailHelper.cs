@@ -88,9 +88,6 @@ namespace Programming.Utils
             {
                 return $"Message:{ex.Message}\nStackTrace:{ex.StackTrace}\nInnerException:{ex.InnerException}\nSource:{ex.Source}\nData:{ex.Data}\nHResult:{ex.HResult}\nTargetSite:{ex.TargetSite}";
             }
-
-
-
             ////实例化Smtp客户端
             //SmtpClient smtp = new SmtpClient
             //{
